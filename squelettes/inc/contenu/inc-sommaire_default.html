@@ -1,106 +1,30 @@
 #CACHE{24*3600}
-
 #SET{date,#DATE}
 #SET{affichage,'1'}
+<B_objets>
 <ul  class="home top">	
-	<BOUCLE_art1(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{0,1}>
-	[(#DATE|<{#GET{date}}|oui)#SET{affichage,0}]
-	<li class="left">	
-		<BOUCLE_rub1(RUBRIQUES){id_rubrique}>
-			<BOUCLE_rub1_par(RUBRIQUES){id_enfant}{tout}>
-			<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-			</BOUCLE_rub1_par>
-				<BOUCLE_rub1_par_alter(RUBRIQUES){id_rubrique}{tout}{0,#GET{date}}>
-				<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-				</BOUCLE_rub1_par_alter>
-					<BOUCLE_rub1_par_alter_act(RUBRIQUES){id_rubrique=1}{tout}>
-					<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-					</BOUCLE_rub1_par_alter_act>			
-				<//B_rub1_par_alter>							
-			<//B_rub1_par>		
-		</BOUCLE_rub1>
-                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
-                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
-		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
-                [(#INTRODUCTION)]<br/><small>
-		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
-        </li>	
-        </BOUCLE_art1>
-        
-	<BOUCLE_art2(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{1,1}>
-	[(#DATE|<{#GET{date}}|oui)#SET{affichage,0}]
-	<li class="right">	
-		<BOUCLE_rub2(RUBRIQUES){id_rubrique}>
-			<BOUCLE_rub2_par(RUBRIQUES){id_enfant}{tout}>
-			<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-			</BOUCLE_rub2_par>
-				<BOUCLE_rub2_par_alter(RUBRIQUES){id_rubrique}{tout}{0,#GET{date}}>
-				<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-				</BOUCLE_rub2_par_alter>
-					<BOUCLE_rub2_par_alter_act(RUBRIQUES){id_rubrique=1}{tout}>
-					<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-					</BOUCLE_rub2_par_alter_act>			
-				<//B_rub2_par_alter>							
-			<//B_rub2_par>		
-		</BOUCLE_rub2>
-                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
-                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
-		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
-                [(#INTRODUCTION)]<br/><small>
-		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
-        </li>	
-        </BOUCLE_art2>
-        <li class="clear"> </li>        
+    
+    <BOUCLE_objets(SELECTION_OBJETS){objet_dest=rubrique}{id_objet_dest=#ENV{id_rubrique}}{lang}{par ordre}>
+    [(#DATE|<{#GET{date}}|oui)#SET{affichage,0}]
+    <li class="[(#COMPTEUR_BOUCLE|alterner{left,right})]">
+        [(#ID_OBJET|generer_modele{#OBJET,modeles_so/objet_home,#ARRAY{
+                id_selection_objet,#ID_SELECTION_OBJET,
+                langue,#ENV{lang},
+                objet_dest,#OBJET_DEST,
+                id_objet_dest,#ID_OBJET_DEST,
+                total_boucle,#TOTAL_BOUCLE,
+                id_selection_objet,#ID_SELECTION_OBJET,
+                titre,#TITRE,
+                compteur_boucle,#COMPTEUR_BOUCLE,
+                date,#DATE,
+                type_lien,#TYPE_LIEN,       
+                }})]
+    </li>   
+    [(#COMPTEUR_BOUCLE|modulo{2}|=={0}|oui)
+     <li class="clear"> </li>        
 </ul>
-
-<ul class="home bottom">     
-
-	<BOUCLE_art3(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{2,1}>
-	[(#DATE|<{#GET{date}}|oui)#SET{affichage,0}]
-	<li class="left">	
-		<BOUCLE_rub3(RUBRIQUES){id_rubrique}>
-			<BOUCLE_rub3_par(RUBRIQUES){id_enfant}{tout}>
-			<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-			</BOUCLE_rub3_par>
-				<BOUCLE_rub3_par_alter(RUBRIQUES){id_rubrique}{tout}{0,#GET{date}}>
-				<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-				</BOUCLE_rub3_par_alter>
-					<BOUCLE_rub3_par_alter_act(RUBRIQUES){id_rubrique=1}{tout}>
-					<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-					</BOUCLE_rub3_par_alter_act>			
-				<//B_rub3_par_alter>							
-			<//B_rub3_par>		
-		</BOUCLE_rub3>
-                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
-                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
-		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
-                [(#INTRODUCTION)]<br/><small>
-		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
-        </li>	
-        </BOUCLE_art3>
-	<BOUCLE_art4(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{3,1}>
-	[(#DATE|<{#GET{date}}|oui)#SET{affichage,0}]
-	<li class="right">	
-		<BOUCLE_rub4(RUBRIQUES){id_rubrique}>
-			<BOUCLE_rub4_par(RUBRIQUES){id_enfant}{tout}>
-			<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-			</BOUCLE_rub4_par>
-				<BOUCLE_rub4_par_alter(RUBRIQUES){id_rubrique}{tout}{0,#GET{date}}>
-				<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-				</BOUCLE_rub4_par_alter>
-					<BOUCLE_rub4_par_alter_act(RUBRIQUES){id_rubrique=1}{tout}>
-					<h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-					</BOUCLE_rub4_par_alter_act>			
-				<//B_rub4_par_alter>							
-			<//B_rub4_par>		
-		</BOUCLE_rub4>
-                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
-                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
-		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
-                [(#INTRODUCTION)]<br/><small>
-		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
-        </li>	
-        </BOUCLE_art4>  
-     	<li class="clear"> </li>
-
+<ul class="home bottom">    
+    ]
+    </BOUCLE_objets>
 </ul>
+</B_objets>
