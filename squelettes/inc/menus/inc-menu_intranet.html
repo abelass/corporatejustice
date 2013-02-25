@@ -1,0 +1,19 @@
+#CACHE{24*36*3600}
+							
+<div id='nav-container'>
+
+<B_rubriques>
+	<ul id="nav">
+	<BOUCLE_rubriques(RUBRIQUES) {id_rubrique IN 34,33,32} {par num titre, titre}{tout}>	
+		<li>
+			<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" >[(#TITRE|supprimer_numero|couper{80})]</a>
+		</li>
+	</BOUCLE_rubriques>
+		<li> <a href="ecrire/"><:espace_prive:></a></li>
+		<li> <a href="#URL_SITE_SPIP/"><:accueil_site:></a></li>
+	</ul>
+</B_rubriques>
+<!-- formulaire recherche  + selecteur article/forum -->
+	[(#REM) ligne form recherche dans forum ]
+	[(#MODELE{recherche_forum}{id_rubrique=#GET{sector}})]
+</div>

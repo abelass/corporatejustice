@@ -1,0 +1,108 @@
+#CACHE{7200}
+
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/inc-head}>
+</head>
+
+<?php 
+
+// Regler la langue courante selon les infos envoyees par le brouteur
+
+
+function regler_langue_navigateur() {
+        global $HTTP_SERVER_VARS, $HTTP_COOKIE_VARS;
+        if ($cookie_lang = $HTTP_COOKIE_VARS['spip_lang']) {
+                if (changer_langue($cookie_lang)) return $cookie_lang;
+        }
+        $accept_langs = explode(',', $HTTP_SERVER_VARS['HTTP_ACCEPT_LANGUAGE']);
+        if (is_array($accept_langs)) {
+                while(list(, $s) = each($accept_langs)) {
+                        if (eregi('^([a-z]{2,3})(-[a-z]{2,3})?(;q=[0-9.]+)?$', trim($s), $r)) {
+                                $lang = strtolower($r[1]);
+                                if (changer_langue($lang)) return $lang;
+                        }
+                }
+        }
+        return true;
+}
+?>
+
+<body class="page_sommaire">
+<div id="topLeft">  </div>
+<div id="page-wrap">
+	<div id="inside">
+		<div id="left-sidebar">
+		<INCLURE {fond=inc/menus/inc-menu_langues}>
+      		[(#REM) Menu de navigation]
+		<INCLURE{fond=inc/menus/inc-menu_laterale}>
+		
+
+		<BOUCLE_rub(RUBRIQUES){id_rubrique=40}{tout}>				
+		<B_art>
+		<div class="news js-hidden" id="ticker-wrapper">
+
+			<ul id="js-news" class="js-hidden">
+					<BOUCLE_art(ARTICLES) {lang}{id_rubrique} {age<=120}{!par date} {0,10}>
+					<li class="news-item"><a href="#URL_SITE" class="spip_out">[(#TITRE|texte_script)]</a><br/>[(#DATE|affdate)]<br/>[(#NOM_SITE*|sinon{#LESAUTEURS|textebrut})]</li>
+					</BOUCLE_art>		
+			</ul>
+		</div>
+			<script type="text/javascript">
+				$(function () {
+					$('#js-news').ticker({
+						displayType:'fade',
+						speed: 0.10,
+						fadeInSpeed:600,
+						titleText: '<a href="#URL_RUBRIQUE" title="#TITRE">#TITRE</a>',
+						controls: false
+					});
+				});
+			</script>
+			
+		
+		</B_art>
+		
+
+		</BOUCLE_rub>					
+
+	</div>
+
+		<div id="main-content">	
+
+		[(#REM) Entete de la page + titre du site ]
+
+	<INCLURE{fond=inc/inc-entete}>
+
+
+	<div id="content">				
+
+	<INCLURE {fond=inc/inc-photos}{lang=en}>
+
+	[(#REM) Fil d'Ariane ]
+
+	<div id="breadcrumb"><:accueil_site:> ></div>
+
+
+<INCLURE {fond=inc/contenu/inc-sommaire_default} {lang}{id-rubrique=0}>
+</div><!-- end content -->
+	
+
+	[(#REM) Pied de page ]
+
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
+
+		<div class="clear">  </div> 	
+		</div><!-- end main-content -->	
+
+	</div><!-- inside -->
+
+</div><!-- page-wrap -->
+
+</body>
+
+</html>
+

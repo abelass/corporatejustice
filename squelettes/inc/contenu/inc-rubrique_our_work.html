@@ -1,0 +1,14 @@
+#CACHE{12*3600}
+				<B_mots>
+				<div class="twoColumnsRight">
+				<h3><:info_on:></h3>
+				<ul>
+				<BOUCLE_mots(MOTS) {id_groupe=#ENV{id_groupe}}{par num titre,titre}>
+				
+				[(#ID_RUBRIQUE|!=={11}|?{' ',''})[(#ID_MOT|=={#ENV{priorities}}|?{<li class="on">#TITRE</li>,<li><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{priorities,#ID_MOT})]" title="#TITRE"> #TITRE</a></li>})]]
+				</BOUCLE_mots>
+				</ul>
+				</div>
+				</B_mots>
+			
+[(#ENV{priorities}|=={''}|?{' ' ,''})<div class="twoColumnsLeft"><INCLURE{fond=inc/contenu/inc-rubrique_our_work_default}{id_rubrique}{id_groupe=#ENV{id_groupe}}></div>]

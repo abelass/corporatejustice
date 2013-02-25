@@ -1,0 +1,61 @@
+[(#REM)
+  Barre de navigation, ouverte sur la hierarchie courante
+  On fait un plan, et, quand on avance vers une rubrique,
+  on l'affiche si son parent est expose ou est la racine du site. Sont exclus les rubriques 11,25,31]
+  
+  #SET{rubs_interdit,#ARRAY{
+      0,11,1,25,2,31,3,32,4,23,5,48,6,37
+      }
+    }
+
+  <BOUCLE_article_mois_avec_trad(ARTICLES) {id_rubrique=17}{age<=0}{par date,titre}{0,1}> </BOUCLE_article_mois_avec_trad>
+  #SET{rubs_interdit,#GET{rubs_interdit}|array_merge{#ARRAY{5,17}}}
+  <//B_article_mois_avec_trad>
+
+
+<B_rubriques>
+<div id="mainNavi"><a href="#URL_SITE_SPIP/" title="<:accueil_site:>"><img src="#CHEMIN{squelettes/images/logo_eccj.gif}" width="215" height="133" border="0"/></a>&nbsp;
+
+
+      <ul id="Navigation">        
+  <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{tout}{id_rubrique !IN #GET{rubs_interdit}}>
+  
+  
+        <li [ class="(#EXPOSE)"]>
+      <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a>
+
+          [(#ENV{id_rubrique}|=={11}|?{' ',''})<INCLURE{fond=squelettes/inc/menus/inc-menu_laterale_ss_cj_elevel} {id_rubrique}{periode=#ENV{periode}}>]
+                              
+      <B_sous_rubriques>                              
+                          <ul>
+                                <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par id_rubrique}{tout}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}{tout}>#EXPOSE{' '}</BOUCLE_test_expose>
+          <li [ class="(#EXPOSE)"]><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques){tout}></BOUCLE_re>  </li>
+        </B_test_expose></BOUCLE_sous_rubriques>
+      </ul>
+      </B_sous_rubriques>
+    </li>
+  </BOUCLE_rubriques>
+  </ul>[(#REM)
+    <div class="socialbox">
+
+        <div class="socialweb">
+          <a href="http://twitter.com/home/?status=RIGHTS+FOR+PEOPLE+RULES+FOR+BUSINESS%3A+http://www.rightsforpeople.org/&source=http://www.rightsforpeople.org/" target="_blank"><div id="twitter" class="socialwebimg" title="Twitter"><img src="#CHEMIN{images/Twitter-icon.png}"  alt="Twitter"/></a></div>
+        </div>
+        
+        <div class="socialweb">
+          <a href="http://www.facebook.com/rightsforpeople" target="_blank"  title="Facebook"><img src="#CHEMIN{images/FaceBook-icon.png}"  alt="Facebook"/></a>
+        </div>
+
+
+         <div class="socialweb">
+          <a href="http://www.youtube.com/rightsforpeople" target="_blank"  title="Youtube"><img src="#CHEMIN{images/Youtube-icon.png}"  alt="Youtube"/></a>
+        </div>
+        
+         <div class="socialweb">
+          <a href="http://www.flickr.com/photos/rightsforpeople" target="_blank"  title="Flickr"><img src="#CHEMIN{images/Flickr-icon.png}"  alt="Flickr"/></a>
+        </div>
+
+    </div>]  
+</div>
+</B_rubriques>
+

@@ -1,0 +1,50 @@
+#CACHE{24*3600}
+			<div>
+                        
+				<B_article_recent>
+				<div>
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					
+						<BOUCLE_article_recent(ARTICLES)  {id_rubrique}{par date}{inverse}{lang}{0,3}{doublons}>
+                                                      <h3 class="titre"><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
+                                                      <BOUCLE_documents_portfolio(DOCUMENTS) {id_article} {mode=document} {extension IN png,jpg,gif} {par num titre, date} {doublons}>
+                                                      [<div class="img_list"><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]" [ title="(#TITRE|couper{80}|texte_backend)"]>(#FICHIER|copie_locale|image_reduire{300}|inserer_attribut{alt,[(#TITRE|couper{80}|texte_backend)]})</a></div>]
+				</BOUCLE_documents_portfolio>
+			</div>
+                                                      </B_documents_portfolio>
+                                                      [<div class="img_list">(#LOGO_ARTICLE|left||image_reduire{300})</div>]
+                                                          <//B_documents_portfolio><small>
+                                                      [(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+                                                      [<div class="#EDIT{texte} texte">(#TEXTE)</div>]
+			<BOUCLE_afficher_document(DOCUMENTS) {id_article} {mode=document}{extension IN doc,odf,rtf,pdf,html}>
+			<div >
+				[<a href="#URL_DOCUMENT" title="#TITRE"><div class="#EDIT{titre} spip_doc_titre">(#TITRE)</div></a>]<small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small>
+
+			</div>
+			</BOUCLE_afficher_document>    
+			<hr/>	<br />		
+						</BOUCLE_article_recent>
+					
+				</div>
+				</B_article_recent>                        
+				[(#REM) Articles de la rubrique ]
+				<B_articles>
+                                <br class="nettoyeur" />
+				<div>
+					#ANCRE_PAGINATION
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					<ul>
+						<BOUCLE_articles(ARTICLES) {id_rubrique}{par date}{inverse} {pagination 15}{lang}{doublons}>
+						<li>
+							<h3 class="titre"><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
+							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
+				</B_articles>
+
+				
+			</div><!-- fin ______ -->
+

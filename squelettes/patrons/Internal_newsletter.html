@@ -1,0 +1,270 @@
+#CACHE{0}
+#HTTP_HEADER{Content-Type: text/html}
+[(#REM)
+<!--
+/**********************************************************
+* Ce squelette pour spip-listes    
+* Patron: nouveautes.html liste les dernieres nouveautes
+* Ce squelette affiche les articles et breves publies depuis la date passee en reference
+* Utilise une balise #DATE_MODIF_SITE
+* Precautions:                             
+* - ne pas envoyer des gabarits de plus de 10Ko
+* - ne pas placer de balises html <html><body> ni de fermeture </body></html>
+* ils seront ajoutes automatiquement a l'envoi du mail
+* - mettre les style  CSS directement dans les balises pour etre sur qu'ils seront interpretes (meme par les webmails)
+* - les urls et liens images seront automatiquement converties en absolues
+*  ex. rubrique5.html -> http://www.monsite.org/rubrique5.html
+*
+* La balise suivante est utile pour generer un message vide (non envoye) si il n'y a pas de nouveautes depuis la date indiquee
+* [ Affichage ici (#DATE_MODIF_SITE|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})  Affichage ici ]
+*
+***********************************************************/
+
+?utm_source=newsletter&utm_medium=email&utm_campaign=internal
+
+-->
+]
+[
+  <div class="body" style="background: #fff;color: #ccc;font-family:'Trebuchet MS', Tahoma, Arial, Verdana,sans-serif;font-size: 0.9em;text-align: left;width:1000px">
+  <div class="conteneur" style="width: 1000px;background: #fff;color: #000;text-align: left;margin: 0 auto;padding: 15px;">
+(#DATE_MODIF_SITE|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})
+]
+[(#REM)date du jour et non du dernier envoi]
+
+#SET{date_today,#EVAL{date('Y-m-d G:i:s');}}
+
+#SET{date,#GET{date_today}|affdate{'Y-m'}}
+#SET{var_google,&utm_source=newsletter&utm_medium=email&utm_campaign=internal&utm_term=#GET{date}}
+<table style="width:1000px">
+  <tbody style="font-size:13px;">
+	<tr style="cell-align:top;">
+		<td>
+			[<div style="float:left; width:170px; margin:0 5px 5px 0px"><img src="(#LOGO_SITE_SPIP|image_reduire{170}|extraire_attribut{src}|url_absolue)"/></div>]
+		</td>
+		<td colspan="2"  style="cell-align:top;">
+			
+			#SET{id_courrier,''}
+			#GET{id_courrier}
+			<BOUCLE_courrier_manuel(COURRIERS){id_courrier=#EVAL{_request('id_courrier');}}>
+				#SET{id_courrier,#ID_COURRIER}
+			</BOUCLE_courrier_manuel>
+				<BOUCLE_courrier_auto(COURRIERS){0,1}{!par id_courrier}>
+					#SET{id_courrier,#ID_COURRIER|plus{1}}
+				</BOUCLE_courrier_auto>			
+			<//B_courrier_manuel>
+			
+			View this newsletter <a href="[(#TEST|trim|generer_url_public{page=courrier&id_courrier=#GET{id_courrier}[(#GET{var_google})]})]">online </a>
+		</td>
+	
+	</tr>
+    <tr>
+      <td colspan="3"><h1 style="color:#000000; background: #E0F007;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">ECCJ Internal Newsletter, [(#GET{date}|affdate)]</h1></td>
+    </tr>
+    <tr style="cell-align:top" valign=top>
+      <td style="cell-align:top; width:35%" valign=top id="id_115">
+		 <p>Dear Reader,</p>
+        <p>Welcome to the ECCJ Newsletter [(#GET{date}|affdate)]</p>
+        <BOUCLE_mots(MOTS){id_groupe=23} {id_mot !IN 119,120,114,113,121}{par num titre}>
+        #SET{titre,#TITRE}
+        [(#ID_MOT|=={115}|oui)#SET{titre,<span style="font-weight:bold">#TITRE this edition</span>}]
+          <B_top><p>
+            <BOUCLE_top(ARTICLES){id_mot}{id_mot IN 115,116,117,118}{age_relatif<0}{par date}{inverse}{0,1}>
+            <a href="#id_#ID_MOT" title="[(#TITRE|textebrut)]">[(#COMPTEUR_BOUCLE|=={2}|oui)</p><p>][(#GET{titre}) ]</a>            
+            </BOUCLE_top>
+            </p>
+          </B_top>
+        </BOUCLE_mots>
+      </td>
+      <td style="cell-align:top; width:35%" valign=top id="id_115">       
+		          
+        <div style="border:solid 1px #CCC;padding:3px; width:90%">
+          <p>This is an internal newsletter. Articles marked with this logo [<img src="(#CHEMIN{IMG/moton119.jpg}|image_reduire{30}|extraire_attribut{src}|url_absolue)"/>] are suitable for external communication. Please check all other content with the group concerned if you want to publish it. </p>
+          <p style="font-weight:bold;">Remember that you need to log in to the ECCJ insite to read some the documents listed below. You can get your login from <a href="mailto:info@corporatejustice.org">info@corporatejustice.org</a></p>
+        </div>
+      </td>
+      <td style="width:30%;" rowspan="5" valign=top>
+
+        <BOUCLE_editorial(ARTICLES){id_mot=113}{age_relatif<0}{par date}{inverse}{0,1}>
+          <div style="border:solid 1px #CCC; padding:3px; margin-bottom:5px">
+          <h2 id="#ID_ARTICLE" style="color:#000000; padding: 0.1em;margin: 0.1em;font-weight: bold;text-align: center;">#TITRE</h2>
+          [<div style="float:left; width:30px; margin:0 5px 5px 0px">
+            <img src="(#LOGO_ARTICLE|image_reduire{30}|extraire_attribut{src}|url_absolue)"/>
+          </div>]
+          [<div>(#INTRODUCTION)</div>]
+          <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]">Find out more</a>  
+          </div>      
+        </BOUCLE_editorial>
+        <B_latest_case_studies>
+          <div style="border:solid 1px #CCC; padding:3px; margin-bottom:5px">
+            <h2 id="#ID_ARTICLE" style="color:#000000; padding: 0.1em;margin: 0.1em;font-weight: bold;text-align: center;">Latest case studies</h2>
+          <BOUCLE_latest_case_studies(ARTICLES){id_mot=127}{age_debut_relatif<0}{lang=en}{par date}{inverse}>
+            <div style="clear:both;margin-bottom:5px;margin-top:5px;min-height:35px">
+              <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]" title="[(#TITRE|textebrut)]">
+                [<img style=" float:left;margin-right:5px" src="(#LOGO_ARTICLE|image_passe_partout{30,30}
+			|image_recadre{30,30}|extraire_attribut{src}|url_absolue)"/>]  
+                [ (#TITRE)]</a>
+                <br style="clean:both;"/>
+            </div>
+          </BOUCLE_latest_case_studies>
+          </div>    
+        </B_latest_case_studies>
+        <B_latest_publications>
+          <div style="border:solid 1px #CCC; padding:3px; margin-bottom:5px">
+            <h2 id="#ID_ARTICLE" style="color:#000000; padding: 0.1em;margin: 0.1em;font-weight: bold;text-align: center;">Latest Publications</h2>
+          <BOUCLE_latest_publications(ARTICLES){id_mot=120}{age_relatif<0}{lang=en}{par date}{inverse}>
+            <div style="clear:both;margin-bottom:5px;margin-top:5px;min-height:35px">
+              <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]" title="[(#TITRE|textebrut)]">
+                [<img style=" float:left;margin-right:5px" src="(#LOGO_ARTICLE|image_reduire_recadre{30,30}|extraire_attribut{src}|url_absolue)"/>]  
+                [ (#TITRE)]</a>
+                <br style="clean:both;"/>
+            </div>
+          </BOUCLE_latest_publications>
+          </div>
+        </B_latest_publications>
+        <div style="border:solid 1px #CCC; padding:3px; margin-bottom:5px">
+            <h2 id="#ID_ARTICLE" style="color:#000000; padding: 0.1em;margin: 0.1em;font-weight: bold;text-align: center;">Events Calendar</h2>			
+        <B_events_calendar_members>
+            <h3 id="#ID_ARTICLE" style="padding: 0.1em;margin: 0.1em;font-weight: bold;text-align: center;">Members’ events:</h3>
+          <BOUCLE_events_calendar_members(EVENEMENTS){id_mot=114}{date_fin>=#GET{date_today}}{par date_debut}>
+            #SET{mois,#DATE_DEBUT|mois}
+            <B_event_mois_members>
+              <b>[(#DATE_DEBUT|nom_mois)]</b>
+              <ul>
+              <BOUCLE_event_mois_members(EVENEMENTS){id_mot=114}{mois=#GET{mois}}{doublons}>
+                <li><a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]" title="[(#DATE_DEBUT|affdate{d-m-Y})]">#TITRE</a></li>
+              </BOUCLE_event_mois_members>
+              </ul>
+            </B_event_mois_members>
+          </BOUCLE_events_calendar_members>
+        <B_events_calendar>
+
+            <h3 id="#ID_ARTICLE" style="color:#000000; padding: 0.1em;margin: 0.1em;font-weight: bold;text-align: center;">Other events of interest:</h3>
+          <BOUCLE_events_calendar(EVENEMENTS){id_mot=121}{date_fin>=#GET{date_today}}{par date_debut}>
+            #SET{mois,#DATE_DEBUT|mois}
+            <B_event_mois>
+              <b>[(#DATE_DEBUT|nom_mois)]</b>
+              <ul>
+              <BOUCLE_event_mois(EVENEMENTS){id_mot=121}{mois=#GET{mois}}{doublons}>
+                <li><a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]" title="[(#DATE_DEBUT|affdate{d-m-Y})]">#TITRE</a></li>
+              </BOUCLE_event_mois>
+              </ul>
+            </B_event_mois>
+          </BOUCLE_events_calendar>
+          </div>
+      </td>
+    </tr>
+    <tr style="cell-align:top" valign=top>
+		<td  colspan="2">
+		<B_top_story>
+		<h2 style="color:#000000; background: #E0F007;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">Top Story</h2>			
+        <div style="border:dashed 1px #CCC;padding:3px">
+        <BOUCLE_top_story(ARTICLES){id_mot=115}{age_relatif<0}{par date}{inverse}{0,1}>
+          <h3 style="color: #666666;font-family: 'Arial', 'Sans', sans-serif;font-size:14px;margin: 0.5em 0px 0.25em;">#TITRE</h3>
+          [<div style="float:left; width:75px; margin:0 5px 5px 0px"><img src="(#LOGO_ARTICLE|image_reduire{75}|extraire_attribut{src}|url_absolue)"/></div>]
+          [<div>(#INTRODUCTION)</div>]
+          <INCLURE{fond=patrons/inc-Internal_newsletter_publishable,id_article}/>
+          <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]">Read the whole article</a>  
+        </BOUCLE_top_story>
+         <br style="clear:both" />
+        </div>    
+        </B_top_story>      
+		
+		</td>
+
+	</tr>   
+    
+    <tr id="id_116">
+      <td  colspan="2">
+        <B_eccj_update>
+        
+          <h2 style="color:#000000; background: #E0F007;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">ECCJ update</h2>
+          <BOUCLE_eccj_update(ARTICLES){id_mot=116}{age_relatif<0}{par date}{inverse}>
+          <div style="border:dashed 1px #CCC;padding:3px;margin-bottom:5px">
+           <h3 style="color: #666666;font-family: 'Arial', 'Sans', sans-serif;font-size:14px;margin: 0.5em 0px 0.25em;">#TITRE</h3>
+            [<div style="float:left; width:100px; margin:0 5px 5px 0px"><img src="(#LOGO_ARTICLE|image_reduire{100}|extraire_attribut{src}|url_absolue)"/></div>]
+            [<div>(#INTRODUCTION)</div>]
+            <INCLURE{fond=patrons/inc-Internal_newsletter_publishable,id_article}/>
+            <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]">Read the whole article</a>    
+            <br style="clear:both" />
+          </div>    
+          
+          </BOUCLE_eccj_update>
+      </td>
+            
+    </tr>
+    <tr id="id_117">
+      <td  colspan="2">
+        <B_political_update>
+          <h2 id="#ID_ARTICLE" style="color:#000000; background: #E0F007;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">Political update</h2>
+          <BOUCLE_political_update(ARTICLES){id_mot=117}{age_relatif<0}{par date}{inverse}>
+          <div style="border:dashed 1px #CCC;padding:3px; margin-bottom:5px; clear:both;">  
+            <h3 style="color: #666666;font-family: 'Arial', 'Sans', sans-serif;font-size:14px;margin: 0.5em 0px 0.25em;">#TITRE</h3>
+            [<div style="float:right; width:100px; margin:0 5px 5px 0px"><img src="(#LOGO_ARTICLE|image_reduire{100}|extraire_attribut{src}|url_absolue)"/></div>]
+            [<div>(#INTRODUCTION)</div>]
+            <INCLURE{fond=patrons/inc-Internal_newsletter_publishable,id_article}/>
+            <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE[(#GET{var_google})]})]">Read the whole article</a>  
+            <br style="clear:both" />
+          </div>  
+          </BOUCLE_political_update>
+      </td>
+    </tr>
+    
+    #SET{articles_left,#ARRAY}
+    #SET{articles_right,#ARRAY}
+    <BOUCLE_member_updates(ARTICLES){id_mot=118}{age_relatif<0}{par date}{inverse}>
+		
+    [(#COMPTEUR_BOUCLE|modulo{2}|=={1}|?{
+		[(#SET{articles_left,#GET{articles_left}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]
+		,
+		[(#SET{articles_right,#GET{articles_right}|array_merge{#ARRAY{#COMPTEUR_BOUCLE,#ID_ARTICLE}}})]
+		})]
+    </BOUCLE_member_updates>
+
+
+    <tr id="id_118">
+      <td  colspan="2"  style="cell-align:top;" valign=top>
+		<div style="clear:both;">
+      <B_member_updates_left>
+        <h2 id="#ID_ARTICLE" style="color:#000000; background: #E0F007;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">Member updates</h2>
+        <div style="float:left">
+      <BOUCLE_member_updates_left(ARTICLES){id_article IN #GET{articles_left}}{par date}{inverse}>
+          <div style="border:dashed 1px #CCC;padding:3px; width:330px;margin-bottom:10px">
+          <h3 style="color: #666666;font-family: 'Arial', 'Sans', sans-serif;font-size:14px;margin: 0.5em 0px 0.25em;">#TITRE</h3>
+          [<div style="float:[(#COMPTEUR_BOUCLE|alterner{left, right})]; width:100px; margin:0 5px 5px 0px"><img src="(#LOGO_ARTICLE|image_reduire{100}|extraire_attribut{src}|url_absolue)"/></div>]
+          [<div>(#INTRODUCTION)</div>]
+          <INCLURE{fond=patrons/inc-Internal_newsletter_publishable,id_article}/>
+          <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE&id_evenement=#ID_EVENEMENT[(#GET{var_google})]})]">Read the whole article</a>  
+          </div>   
+      </BOUCLE_member_updates_left>
+        </div>
+      </B_member_updates_left>
+      <B_member_updates_right>
+       
+        <div style="float:right">
+      <BOUCLE_member_updates_right(ARTICLES){id_article IN #GET{articles_right}}{par date}{inverse}>
+          <div style="border:dashed 1px #CCC;padding:3px; width:330px;margin-bottom:10px;margin-left:10px;">
+          <h3 style="color: #666666;font-family: 'Arial', 'Sans', sans-serif;font-size:14px;margin: 0.5em 0px 0.25em;">#TITRE</h3>
+          [<div style="float:[(#COMPTEUR_BOUCLE|alterner{left, right})]; width:100px; margin:0 5px 5px 0px"><img src="(#LOGO_ARTICLE|image_reduire{100}|extraire_attribut{src}|url_absolue)"/></div>]
+          [<div>(#INTRODUCTION)</div>]
+          <INCLURE{fond=patrons/inc-Internal_newsletter_publishable,id_article}/>
+          <a href="[(#TEST|trim|generer_url_public{page=article&id_article=#ID_ARTICLE&id_evenement=#ID_EVENEMENT[(#GET{var_google})]})]">Read the whole article</a>  
+          </div>   
+      </BOUCLE_member_updates_right>
+        </div>
+      </B_member_updates_right>
+      </div>
+      </td>  
+    </tr>
+    <tr>
+	<td colspan="2">Kind regards, <b>The ECCJ Secretariat</b></td>
+    </tr>
+    <tr>
+      <td colspan="2">Find out more: <a href="#URL_SITE_SPIP">ECCJ Website</a> | <a href="[(#TEST|trim|generer_url_public{page=rubrique&id_rubrique=40[(#GET{var_google})]})]">Latest News on Corporate Accountability Issues </a> | <a href="[(#TEST|trim|generer_url_public{page=rubrique&id_rubrique=19[(#GET{var_google})]})]">Contact the ECCJ Secretariat</a></td>
+    </tr>
+  </tbody>
+</table>
+[
+(#DATE_MODIF_SITE|strtotime|>{[(#ENV{date}|strtotime)]}|?{' ',''})
+  </div>
+  </div>
+]

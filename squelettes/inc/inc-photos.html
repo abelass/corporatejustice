@@ -1,0 +1,7 @@
+#CACHE{0}
+<BOUCLE_sel_pictures(MOTS){id_groupe=12}{par hasard} {0,1}>
+<div style='min-width:528px;
+	height:120px;
+	background:url("[(#LOGO_MOT|image_reduire_recadre{1462,120}|extraire_attribut{src})]") no-repeat;
+	width:expression(document.body.clientWidth < 530? "528px" : document.body.clientWidth > 1462? "1460px" : "auto");'> </div>
+</BOUCLE_sel_pictures>

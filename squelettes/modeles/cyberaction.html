@@ -1,0 +1,13 @@
+#CACHE{7200}
+<div align=#ENV{align}>
+<h2>#ENV{title}</h2>
+<form method="post" action="contact.php">
+<table bgcolor=#ffffcc width=#ENV{width}>
+<tr><td> <input type="hidden" name="sendto" value="#ENV{email}"/></td></tr>
+<tr><td> <:your_email:><font color=red>*</font>:</td><td><input size=25 name="email" /></td></tr>
+<tr><td> <:form_prop_sujet:></td><td><input size=25 name="subject" value="#ENV{subject}" /></td></tr>
+<tr><td colspan=2 align=center><textarea name="message" rows=#ENV{height} cols=#ENV{textwidth}>[(#ENV{text})]</textarea></td></tr>
+<tr><td colspan=2 align=center><input type=submit name="send" value="Submit"></td></tr>
+<tr><td colspan=2 align=center><small><:required:></small></td></tr>
+</table>
+</div>

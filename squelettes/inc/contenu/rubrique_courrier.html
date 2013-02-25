@@ -1,0 +1,20 @@
+<B_liste>
+<h2>Archive</h2>
+[<p class="pagination">(#PAGINATION)</p>]
+<ul id="carre2">
+	<BOUCLE_liste(COURRIERS){id_liste=3} {statut IN publie,auto}{pagination}{!par date_debut_envoi}>
+	<li>
+	[(#EXPOSE|?{
+		#TITRE,
+		<a class="ajax" href="[(#SELF|parametre_url{id_courrier,#ID_COURRIER})]">#TITRE</a>
+		}
+		)]
+	</li>
+	</BOUCLE_liste>
+</ul>
+</B_liste>
+<BOUCLE_principale(COURRIERS){id_courrier}>
+	#TEXTE
+</BOUCLE_principale>
+
+
