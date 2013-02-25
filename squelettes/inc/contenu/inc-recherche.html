@@ -103,7 +103,7 @@
 					<h2 class="titre"><:rechercheavancee:autres_resultats:><:sites_web:></h2>
 					[<p class="pagination">(#PAGINATION)</p>]<hr/>
 						<BOUCLE_sites(SITES) {recherche} {par points}{inverse} {pagination 5}>
-						<h2 class=surtitre><a href="[(#ID_SYNDIC|generer_url_site)]">#NOM_SITE</a></h2>
+						<h2 class=surtitre><a href="[(#ID_SYNDIC|generer_url_entite{site})]">#NOM_SITE</a></h2>
 						</BOUCLE_sites>
 				</div><hr/>
 				</B_sites>
