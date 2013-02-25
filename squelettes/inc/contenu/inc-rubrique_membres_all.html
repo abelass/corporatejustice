@@ -1,5 +1,5 @@
 #CACHE{86400}
-      <INCLURE {fond=squelettes/inc/contenu/inc-rubrique_membres_men_sel}{id_rubrique}{list=#ENV{list}}>
+      <INCLURE{fond=inc/contenu/inc-rubrique_membres_men_sel,id_rubrique,list=#ENV{list}}>
       				<div class="twoColumnsLeft">
       <BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
         <div>
@@ -8,7 +8,7 @@
       </BOUCLE_rubrique>
 
                  <B_article_auteurs_groupes>
-                  <BOUCLE_article_auteurs_groupes(AUTEURS){id_groupe=5}{id_mot!IN 90,20}{par nom}>
+                  <BOUCLE_article_auteurs_groupes(AUTEURS){id_mot=17}{par nom}{tout}>
 				<h4 class="#EDIT{qui} titre"><a href="[(#URL_AUTEUR|parametre_url{lang,[(#ENV{lang})]})]" title="#NOM">#NOM</a></h4>
 				[<div class="logo_rub"><a href="[(#URL_AUTEUR|parametre_url{lang,[(#ENV{lang})]})]" title="#NOM">(#LOGO_AUTEUR|left||image_reduire{100})</a></div>]
                                 [<p>(#BIO)</p>]
