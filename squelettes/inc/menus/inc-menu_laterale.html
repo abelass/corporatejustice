@@ -24,7 +24,7 @@
         <li [ class="(#EXPOSE)"]>
       <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a>
 
-          [(#ENV{id_rubrique}|=={11}|?{' ',''})<INCLURE{fond=squelettes/inc/menus/inc-menu_laterale_ss_cj_elevel} {id_rubrique}{periode=#ENV{periode}}>]
+          [(#ENV{id_rubrique}|=={11}|?{' ',''})<INCLURE{fond=inc/menus/inc-menu_laterale_ss_cj_elevel} {id_rubrique}{periode=#ENV{periode}}>]
                               
       <B_sous_rubriques>                              
                           <ul>
