@@ -1,0 +1,60 @@
+#CACHE{0}
+
+        <BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
+
+              <div>
+
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
+
+            <h2 class="#EDIT{titre} titre">
+
+	  <!--  [(#ENV{periode}|=={''}|?{#TEXTE,''})]-->
+
+	    <BOUCLE_mot(MOTS){id_mot=#ENV{periode}}><h3>#TITRE</h3></BOUCLE_mot></h2>
+
+        </div>  
+
+           <BOUCLE_articles(ARTICLES){id_mot=#ENV{periode}}{lang} {'	<div class="line"> </div>'}{!par date}>
+
+                                                      <h4><a href="[(#URL_ARTICLE|parametre_url{lang,#ENV{lang}})]">#TITRE</a></h4>
+
+                                                      [<p class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</p>]
+
+						      <p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+
+                                                      [<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{300,300})</div>]
+
+              <BOUCLE_afficher_document(DOCUMENTS) {id_article} {mode=document}{extension IN doc,odf,rtf,pdf,html}>
+			<p>
+
+				<a href="#URL_DOCUMENT" title="#TITRE">
+
+                                <p class="spip_doc_titre">[(#LOGO_DOCUMENT|left||image_reduire{30})]<a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE"> [(#TITRE|sinon{<:info_document:>})]</a> <br/>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</p>
+
+                  [<p class="spip_doc_descriptif">(#DESCRIPTIF)</p>]
+
+			</p>
+
+              </BOUCLE_afficher_document>
+
+            [<p class="notes"><h2><:info_notes:></h2>(#NOTES)</p>]	      
+
+	
+
+           </BOUCLE_articles> 
+
+           </B_articles> 
+
+	   [<p class="#EDIT{texte} texte">(#TEXTE|image_reduire{300,300})</p>]
+
+          [<p class="notes"><h2><:info_notes:></h2>(#NOTES)</p>]		   
+
+           <//B_articles> 	   
+
+        </BOUCLE_rubrique>
+
+              </B_rubrique>        
+
+         <h2><:en_construction:></h2>
+
+                <//B_rubrique>

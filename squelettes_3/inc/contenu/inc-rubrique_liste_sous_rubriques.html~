@@ -1,0 +1,81 @@
+#CACHE{24*3600}
+[(#ID_RUBRIQUE|=={7}|?{#SET{id_mot,20},#SET{id_mot,17}})]
+		 <BOUCLE_rub_ECCJ_EU_level(RUBRIQUES){id_rubrique=11}>
+		 <BOUCLE_auteurs_ECCJ_EU_level(AUTEURS){id_mot=#GET{id_mot}}>
+              <BOUCLE_articles_ECCJ_EU_level(ARTICLES){id_auteur}{branche}{doublons affichage_eccj_eu_level}>
+              </BOUCLE_articles_ECCJ_EU_level>
+		</BOUCLE_auteurs_ECCJ_EU_level>
+		</BOUCLE_rub_ECCJ_EU_level>
+		
+            <BOUCLE_articles_documents_ECCJ(ARTICLES) {id_rubrique}{doublons docs_eccj} >[(#REM) Selection activites]
+            </BOUCLE_articles_documents_ECCJ>
+            <BOUCLE_exclus(ARTICLES){doublons affichage_eccj_eu_level}{doublons docs_eccj} {doublons exclus1}{doublons exclus2}{doublons exclus3}>[(#REM) Melange des deux pour exclusion]
+            </BOUCLE_exclus>
+
+            <BOUCLE_rubrique(RUBRIQUES) {id_rubrique}{tout}>
+            				[(#REM) Articles de la rubrique ]
+				<B_article_recent>
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					[<p>(#PAGINATION)</p>]
+					<ul id="carre2">
+						<BOUCLE_article_recent(ARTICLES) {doublons exclus1}{par date}{inverse}{lang}{doublons}{pagination 5}>
+                                                      <li>
+						      <a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+						<B_traductions>
+							<br />
+						<small> - [(#TOTAL_BOUCLE|=={1}|?{<:article_traduction:>,<:articles_traduction:>})] :
+					<BOUCLE_traductions(ARTICLES) {traduction} {par lang}{exclus}>
+		<a href="[(#URL_ARTICLE|parametre_url{lang,#LANG})]" rel="alternate" hreflang="#LANG" title="[(#TITRE|texte_backend)]">[(#LANG)]</a> 
+					</BOUCLE_traductions>
+					</small>
+					</B_traductions>
+                                                      [<p class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{45})</p>]
+                                                      [<br /><small>(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+                                                      [<div class="#EDIT{texte} texte">(#INTRODUCTION|couper{150})</div>]</li>				
+						</BOUCLE_article_recent>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</B_article_recent>
+				[(#REM)S'il n'y a pas d'article dans la langue, affiche les articles des autres langues]
+				
+			    [(#REM)Filtre les doublures en cas d''évènenements traduits]
+		<BOUCLE_article_mois_avec_trad(ARTICLES) {doublons exclus3}{id_trad>0}>
+			<BOUCLE_article_mois_avec_trad3(ARTICLES) {origine_traduction}{id_trad}{doublons 3}>
+			<BOUCLE_article_mois_avec_trad4(ARTICLES){id_trad}{doublons 3}{doublons 4#ID_TRAD}>
+			</BOUCLE_article_mois_avec_trad4>
+			</BOUCLE_article_mois_avec_trad3>
+						<B_article_recent_all>
+							    [(#REM)Affichage du contenu filtré]
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					[<p>(#PAGINATION)</p>]
+					<ul id="carre2">
+						<BOUCLE_article_recent_all(ARTICLES) {doublons exclus1}{doublons 4#ID_TRAD}{par date}{inverse}{doublons}{pagination 5}>
+                                                      <li>
+						      <a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]
+                                                      [<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{45})</div>]
+                                                      [<br /><small>(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)</small>]
+                                                      [<div class="#EDIT{texte} texte">(#INTRODUCTION|couper{150})</div>]</li>				
+						</BOUCLE_article_recent_all>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</B_article_recent_all>		
+		</BOUCLE_article_mois_avec_trad>	
+								<B_article_recent_all2>
+							    [(#REM)Affichage du contenu filtré]
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					[<p>(#PAGINATION)</p>]
+					<ul id="carre2">
+						<BOUCLE_article_recent_all2(ARTICLES) {doublons exclus1}{par date}{inverse}{doublons}{pagination 5}>
+                                                      <li>
+						      <a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]
+                                                      [<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{45})</div>]
+                                                      [<br /><small>(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)</small>]
+                                                      [<div class="#EDIT{texte} texte">(#INTRODUCTION|couper{150})</div>]</li>				
+						</BOUCLE_article_recent_all2>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</B_article_recent_all2>	
+		<//B_article_mois_avec_trad>			
+				     <//B_article_recent>				
+            </BOUCLE_rubrique>
+            </B_rubrique>

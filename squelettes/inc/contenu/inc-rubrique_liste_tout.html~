@@ -1,0 +1,82 @@
+#CACHE{24*3600}
+   
+	    				<BOUCLE_r_principale7(RUBRIQUES) {id_rubrique=7}{par num titre}{tout}>
+		<BOUCLE_articles_public7(ARTICLES) {id_rubrique=7}{doublons activites7}>
+		</BOUCLE_articles_public7>
+		<BOUCLE_rub_ECCJ_EU_level7(RUBRIQUES){id_rubrique=11}>
+		 <BOUCLE_auteurs_ECCJ_EU_level7(AUTEURS){id_mot=20}>
+              <BOUCLE_articles_ECCJ_EU_level7(ARTICLES){id_auteur}{id_rubrique}{lang}{doublons affichage_eccj_eu_level7}>
+              </BOUCLE_articles_ECCJ_EU_level7>
+		</BOUCLE_auteurs_ECCJ_EU_level7>
+		</BOUCLE_rub_ECCJ_EU_level7>	
+		<BOUCLE_exclus7(ARTICLES){doublons activites7}{doublons affichage_eccj_eu_level7}{doublons exclus7}> [(#REM) Melange des deux pour exclusion]
+		</BOUCLE_exclus7>					
+	                  <B_article_recent7>
+					<h3><a href="[(#URL_RUBRIQUE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
+	
+                  <BOUCLE_article_recent7(ARTICLES){doublons exclus7}{!par date}{lang}{0,1}>
+                                                      <p><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+						<B_traductions>
+							<br />
+						<small> - [(#TOTAL_BOUCLE|=={1}|?{<:article_traduction:>,<:articles_traduction:>})] :
+					<BOUCLE_traductions(ARTICLES) {traduction} {par lang}{exclus}>
+		<a href="[(#URL_ARTICLE|parametre_url{lang,#LANG})]" rel="alternate" hreflang="#LANG" title="[(#TITRE|texte_backend)]">[(#LANG)]</a> 
+					</BOUCLE_traductions>
+					</small>
+					</B_traductions>
+						      </p>
+                                                      [<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
+						      <p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+                                                      <p class="#EDIT{texte} texte">[(#INTRODUCTION|couper{400})]
+                        </BOUCLE_article_recent7>
+						<a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a></p><br class="nettoyeur"/>		
+				</B_article_recent7>
+	                  <B_article_recent7_all>
+					<h4>#TITRE</h4>  
+                  <BOUCLE_article_recent7_all(ARTICLES){doublons exclus7}{!par date}{0,1}>
+                                                      <p><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]</p>
+                                                      [<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
+                                                      <p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+                                                      <p class="#EDIT{texte} texte">[(#INTRODUCTION|couper{400})]
+                        </BOUCLE_article_recent7_all>
+						<a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a></p><br class="nettoyeur"/>			
+				</B_article_recent7_all>				
+					<//B_article_recent7>	
+				</BOUCLE_r_principale7> 
+				<br /><br />
+				<BOUCLE_r_principale6(RUBRIQUES) {id_rubrique=6}{par num titre}{tout}>
+		<BOUCLE_articles_public6(ARTICLES) {id_rubrique=6} {doublons activites6}>
+		</BOUCLE_articles_public6>
+		<BOUCLE_rub_ECCJ_EU_level6(RUBRIQUES){id_rubrique=11}>
+		 <BOUCLE_auteurs_ECCJ_EU_level6(AUTEURS){id_mot=17}>
+              <BOUCLE_articles_ECCJ_EU_level6(ARTICLES){id_auteur}{id_rubrique}{lang}{doublons affichage_eccj_eu_level6}>
+              </BOUCLE_articles_ECCJ_EU_level6>
+		</BOUCLE_auteurs_ECCJ_EU_level6>
+		</BOUCLE_rub_ECCJ_EU_level6>	
+		<BOUCLE_exclus6(ARTICLES){doublons activites6}{doublons affichage_eccj_eu_level6}{doublons exclus6}> [(#REM) Melange des deux pour exclusion]
+		</BOUCLE_exclus6>		
+	                  <B_article_recent6>
+					<h3><a href="[(#URL_RUBRIQUE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
+						
+                  <BOUCLE_article_recent6(ARTICLES){doublons exclus6}{!par date}{lang}{0,1}>
+                                                      <p><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></p>
+                                                      [<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
+                                                      <p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+                                                      <p class="#EDIT{texte} texte">[(#INTRODUCTION|couper{400})]
+                        </BOUCLE_article_recent6>
+						<br  /><a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a>	</p>			
+				</B_article_recent6>
+	                  <B_article_recent6_all>
+					<h3>#TITRE</h3>  
+                  <BOUCLE_article_recent6_all(ARTICLES){doublons exclus6}{!par date}{0,1}>
+                                                      <p><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]</p>
+                                                      [<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
+						      <p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+                                                      <p class="#EDIT{texte} texte">[<p class="#EDIT{texte} texte">(#INTRODUCTION|couper{400})]
+                        </BOUCLE_article_recent6_all>
+						<br  /><a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a>	</p>			
+				</B_article_recent6_all>				
+					<//B_article_recent6>				
+            </BOUCLE_r_principale6>    
+
+

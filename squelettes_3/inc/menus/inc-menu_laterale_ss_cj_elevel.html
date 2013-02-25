@@ -1,0 +1,11 @@
+#CACHE{24+3600}
+
+                            <BOUCLE_CJ_Eu_Level(RUBRIQUES) {id_rubrique}{id_mot=6}>
+                                 <ul>
+                                <BOUCLE_sous_rubriques_CJ_Eu_Level(MOTS) {id_groupe=7} {!par num titre}{tout}>
+                                <li><a [class="(#ENV{periode}|=={#ID_MOT}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{periode,#ID_MOT}|parametre_url{lang,#ENV{lang}})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a></li>
+                                </BOUCLE_sous_rubriques_CJ_Eu_Level>
+                                <li><a [class="(#ENV{periode}|=={all}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{lang,#ENV{lang}}|parametre_url{list,date})]"[ class="(#EXPOSE)"]><:all_documents:></a></li>
+                                </B_sous_rubriques_CJ_Eu_Level>
+                                </ul>      
+                            </BOUCLE_CJ_Eu_Level>

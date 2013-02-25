@@ -1,0 +1,38 @@
+#CACHE{24*3600}
+            <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {par num titre, titre}>
+				<B_articles>
+					[(#ANCRE_PAGINATION)]
+					<ul id="carre2">
+						<BOUCLE_articles(ARTICLES) {id_rubrique} {par date}{inverse} {pagination 10}{lang}>
+						<li>
+							<a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+												      						<B_traductions_art>
+											<br />
+						<small> - [(#TOTAL_BOUCLE|=={1}|?{<:article_traduction:>,<:articles_traduction:>})] :
+					<BOUCLE_traductions_art(ARTICLES) {traduction} {par lang}{exclus}>
+		<a href="[(#URL_ARTICLE|parametre_url{lang,#LANG})]" rel="alternate" hreflang="#LANG" title="[(#TITRE|texte_backend)]">[(#LANG)]</a> 
+					</BOUCLE_traductions_art>
+					</small>
+					</B_traductions_art>
+											<br />
+							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</B_articles>
+				<B_articles_all>
+					[(#ANCRE_PAGINATION)]
+					<ul id="carre2">
+						<BOUCLE_articles_all(ARTICLES) {id_rubrique} {par date}{inverse} {pagination 10}>
+						<li>
+							<a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]<br />
+							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles_all>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</B_articles_all>				
+					<//B_articles>				
+            </BOUCLE_rubrique>
+

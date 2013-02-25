@@ -1,0 +1,85 @@
+#CACHE{24*3600}
+<BOUCLE_rubrique_pr(RUBRIQUES) {id_rubrique=9}{doublons}>
+	<B_article_recent_pr>
+	<h2 >#LESAUTEURS</h2>			
+	<BOUCLE_article_recent_pr(ARTICLES) {id_rubrique}{lang}>
+		<BOUCLE_auteurs_pr(AUTEURS) {id_article}{id_mot=20} {par nom}{unique}>
+			<B_article_par_auteur_pr>							
+			<h3 >#NOM</h3>
+			<ul id="carre2">
+			<BOUCLE_article_par_auteur_pr(ARTICLES)  {id_rubrique}{id_auteur} {pagination 5}{!par date}{lang}>
+                          <li><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+				<B_traductions_art>
+				<br />
+				<small> - [(#TOTAL_BOUCLE|=={1}|?{<:article_traduction:>,<:articles_traduction:>})] :
+				<BOUCLE_traductions_art(ARTICLES) {traduction} {par lang}{exclus}>
+				<a href="[(#URL_ARTICLE|parametre_url{lang,#LANG})]" rel="alternate" hreflang="#LANG" title="[(#TITRE|texte_backend)]">[(#LANG)]</a> 
+				</BOUCLE_traductions_art>
+				</small>
+				</B_traductions_art>
+			<br />
+                        <small>[(#DATE|affdate_jourcourt)]</small>
+			</li>
+  			</BOUCLE_article_par_auteur_pr>
+			</ul>
+			</B_article_par_auteur_pr>									
+		</BOUCLE_auteurs_pr>	  				
+	</BOUCLE_article_recent_pr>
+					
+	<B_article_recent_pr_all>
+	<h2 >#LESAUTEURS</h2>			
+		<BOUCLE_article_recent_pr_all(ARTICLES) {id_rubrique}>
+			<BOUCLE_auteurs_pr_all(AUTEURS) {id_article}{id_mot=20} {par nom}{unique}>
+				<B_article_par_auteur_pr_all>							
+				<h3 >#NOM</h3>
+				[<p class="pagination">(#PAGINATION)</p>]
+				<ul id="carre2">
+				<BOUCLE_article_par_auteur_pr_all(ARTICLES)  {id_rubrique}{id_auteur} {pagination 5}{!par date}>
+                                <li><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]<br />
+                                <small>[(#DATE|affdate_jourcourt)]</small>
+				</li>
+  				</BOUCLE_article_par_auteur_pr_all>
+				</ul>
+				</B_article_par_auteur_pr_all>									
+			</BOUCLE_auteurs_pr_all>	  				
+		</BOUCLE_article_recent_pr_all>					
+				
+	<//B_article_recent_pr>
+						
+	<BOUCLE_auteurs_pr_members(AUTEURS) {id_mot IN 17,90}{par nom}>
+		<BOUCLE_article_par_auteur_exclus(ARTICLES){id_rubrique} {id_auteur=#ID_AUTEUR}{doublons exclu}></BOUCLE_article_par_auteur_exclus>
+	</BOUCLE_auteurs_pr_members>
+	
+	<BOUCLE_article_par_auteur_inclus(ARTICLES){id_rubrique}{doublons exclu}{doublons inclu}></BOUCLE_article_par_auteur_inclus>							
+	<B_article_par_auteur_pr_members>							
+		<BOUCLE_mot(MOTS) {id_mot=17}><h3>#TITRE</h3></BOUCLE_mot>
+		<p class="pagintion">#PAGINATION</p>
+		<ul id="carre2">
+		<BOUCLE_article_par_auteur_pr_members(ARTICLES){id_rubrique}  {doublons inclu} {pagination 5}{!par date}{lang}>
+                 <li><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+			<B_traductions>
+			<br />
+			<small> - [(#TOTAL_BOUCLE|=={1}|?{<:article_traduction:>,<:articles_traduction:>})] :
+			<BOUCLE_traductions(ARTICLES) {traduction} {par lang}{exclus}>
+			<a href="[(#URL_ARTICLE|parametre_url{lang,#LANG})]" rel="alternate" hreflang="#LANG" title="[(#TITRE|texte_backend)]">[(#LANG)]</a> 
+			</BOUCLE_traductions>
+			</small>
+			</B_traductions>
+		<br />
+                <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></li>
+  		</BOUCLE_article_par_auteur_pr_members>
+		</ul>
+		</B_article_par_auteur_pr_members>
+	<B_article_par_auteur_pr_members_all>							
+		<BOUCLE_mot_all(MOTS) {id_mot IN 17,90}><h3>#TITRE</h3></BOUCLE_mot_all>
+		<p class="pagination">#PAGINATION</p>
+		<ul id="carre2">
+		<BOUCLE_article_par_auteur_pr_members_all(ARTICLES){id_rubrique} {doublons inclu} {pagination 5}{!par date}>
+                <li><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]<br />
+                <small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></li>
+  		</BOUCLE_article_par_auteur_pr_members_all>
+		</ul>
+		</B_article_par_auteur_pr_members>				
+	<//B_article_par_auteur_pr_members>								
+</BOUCLE_rubrique_pr>
+</B_rubrique>

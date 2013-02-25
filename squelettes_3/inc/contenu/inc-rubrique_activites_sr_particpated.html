@@ -1,0 +1,51 @@
+#CACHE{24*3600}
+      <B_rubrique> [(#ENV{id_mot}|!=={2}|?{[(#SET{limiteur,0})],[(#SET{limiteur,279000000000000000})]})] 
+
+            <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {par num titre, titre}>            
+            [(#REM) Melange les anciens evenements et activités pour affichage homologue]
+              <BOUCLE_articles_evenements_anciens(ARTICLES) {id_mot=29}{id_rubrique=17}  {age>0}{doublons affichage_evenements}>
+              </BOUCLE_articles_evenements_anciens>
+            <BOUCLE_articles_activites(ARTICLES) {branche} {age>=0}{doublons activites}>[(#REM) Selection activites]
+            </BOUCLE_articles_activites>
+            <BOUCLE_exclus(ARTICLES){doublons affichage_evenements}{doublons activites} {doublons exclus1}{doublons exclus2}>[(#REM) Melange des deux pour exclusion]
+            </BOUCLE_exclus>
+				[(#REM) Articles de la rubrique ]
+				<B_articles>
+					[<p>(#ANCRE_PAGINATION)</p>]
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					<ul id="carre2">
+						<BOUCLE_articles(ARTICLES){age>=0}{!par date}{pagination 10}{lang}{doublons exclus1}>
+						<li>
+<a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+					      						<B_traductions_art>
+											<br />
+						<small> - [(#TOTAL_BOUCLE|=={1}|?{<:article_traduction:>,<:articles_traduction:>})] :
+					<BOUCLE_traductions_art(ARTICLES) {traduction} {par lang}{exclus}>
+		<a href="[(#URL_ARTICLE|parametre_url{lang,#LANG})]" rel="alternate" hreflang="#LANG" title="[(#TITRE|texte_backend)]">[(#LANG)]</a> 
+					</BOUCLE_traductions_art>
+					</small>
+					</B_traductions_art>
+											<br />
+							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+			</B_articles>
+				<B_articles_all>
+					[<p>(#ANCRE_PAGINATION)</p>]
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					<ul id="carre2">
+						<BOUCLE_articles_all(ARTICLES){age>=0}{!par date}{pagination 10}{doublons exclus1}>
+						<li>
+							<a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]<br />
+							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles_all>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+			</B_articles_all>			
+				<//B_articles>
+            </BOUCLE_rubrique>
+  
+            </B_rubrique>

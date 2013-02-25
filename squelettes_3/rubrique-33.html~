@@ -1,0 +1,55 @@
+#CACHE{7200} [(#ID_RUBRIQUE|=={31}|?{#SET{tout,{tout_voir}}})]
+<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body class="page_agenda">
+<div id="topLeft"> </div>
+<div id="page-wrap">
+		<div id="inside">
+			<div id="left-sidebar">
+	<INCLURE {fond=inc/menus/inc-menu_langues}{id_rubrique}>
+								<div id="mainNavi">
+	<INCLURE{fond=/inc/menus/inc-menu_laterale_intranet}{id_rubrique}>
+	<BOUCLE_article (ARTICLES) {id_article=48}>
+<p><a href="[(#URL_ARTICLE|parametre_url{page,agenda}|parametre_url{theme,11}|parametre_url{type,mois})]" title="<:detailed_view:>"><:detailed_view:></a></p>
+<p><a href='[(#URL_ARTICLE|parametre_url{ajout_evenement,oui}|parametre_url{editer,oui})]'><:agenda:titre_cadre_ajouter_evenement:></a></p>
+</BOUCLE_article>
+#FORMULAIRE_EDITION_EVENEMENT
+							</div>
+			</div>
+<div id="main-content">
+		<INCLURE{fond=inc/menus/inc-menu_intranet}{id_rubrique}>
+			<div id="content">	
+	<div id="breadcrumb"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique=33}> <BOUCLE_ariane_sup(RUBRIQUES){id_enfant}> > <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane_sup> > [(#TITRE|couper{80})]</BOUCLE_ariane></div>
+
+		[(#REM) Contenu principal : contenu de la rubrique ]
+        [(#REM) Titre, texte, notes par default, sans rubrique CJ at European level]
+
+        <INCLURE{fond=inc/contenu/inc-rubrique_default}{id_rubrique}>
+
+        
+	[(#REM) Contenu Intranet]  
+	[(#REM) Page d'accueil agenda]  
+<INCLURE{fond=inc/contenu/inc-rubrique_agenda}{id_rubrique} {self=#SELF}{date=#ENV{date}}>
+	</div><!-- fin content -->
+		[(#REM) Pied de page ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
+		</div><!-- end main-content -->
+	</div><!-- fin inside -->
+</div><!-- page wrap-->
+</body>
+</html>
+</BOUCLE_rubrique_principal>
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})    
+#LOGIN_PUBLIC]
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{'',' '})
+<center>Page does not exist, please go back to the <a href="#URL_SITE_SPIP" title="#URL_SITE"> Home Page</a></center> ]
+<//B_rubrique_principal>

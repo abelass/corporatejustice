@@ -1,0 +1,8 @@
+#CACHE{0}
+<BOUCLE_sel_pictures(MOTS){id_groupe=12}{par hasard} {0,1}>#DESCRIPTIF**
+<div style='min-width:528px;
+	height:120px;
+	background:url([(#CHEMIN{squelettes/images/photo-[(#DESCRIPTIF**)].jpg})]) no-repeat;
+	width:expression(document.body.clientWidth < 530? "528px" : document.body.clientWidth > 1462? "1460px" : "auto");'> </div>
+
+</BOUCLE_sel_pictures>

@@ -1,0 +1,59 @@
+<ul  class="home top">	
+	<BOUCLE_art1(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{0,1}>
+	<li class="left">	
+		<BOUCLE_rub1(RUBRIQUES){id_rubrique}>
+		<h1>[(#TITRE|supprimer_numero)]</h1>
+		</BOUCLE_rub1>
+                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
+                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+                [(#INTRODUCTION)]<br/><small>
+		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
+        </li>	
+        </BOUCLE_art1>
+        
+	<BOUCLE_art2(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{1,1}>
+	<li class="right">	
+		<BOUCLE_rub2(RUBRIQUES){id_rubrique}>
+		<h1>[(#TITRE|supprimer_numero)]</h1>
+		</BOUCLE_rub2>
+                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
+                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+                [(#INTRODUCTION)]<br/><small>
+		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
+        </li>	
+        </BOUCLE_art2>
+        <li class="clear"> </li>        
+</ul>
+
+<ul class="home bottom">     
+
+	<BOUCLE_art3(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{2,1}>
+	<li class="left">	
+		<BOUCLE_rub3(RUBRIQUES){id_rubrique}>
+		<h1>[(#TITRE|supprimer_numero)]</h1>
+		</BOUCLE_rub3>
+                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
+                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+                [(#INTRODUCTION)]<br/><small>
+		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
+        </li>	
+        </BOUCLE_art3>
+	<BOUCLE_art4(ARTICLES pb_selection){lang}{par ordre}{spip_pb_selection.id_rubrique=#ENV{id_rubrique}}{1,1}>
+	<li class="right">	
+		<BOUCLE_rub4(RUBRIQUES){id_rubrique}>
+		<h1>[(#TITRE|supprimer_numero)]</h1>
+		</BOUCLE_rub4>
+                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
+                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+		<p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+                [(#INTRODUCTION)]<br/><small>
+		<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
+        </li>	
+        </BOUCLE_art4>  
+     	<li class="clear"> </li>
+
+</ul>
+

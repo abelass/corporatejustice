@@ -1,0 +1,45 @@
+#CACHE{24*3600}
+
+
+      <B_rubrique>
+			<div id="events_container" >
+            <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+	    [(#REM)Filtre les doublures en cas d''évènenements traduits]
+	    	    [(#REM)Filtre d'abord les evenements traduits dont un article est dan la langue courante]
+		<BOUCLE_article_mois_avec_trad(ARTICLES) {id_rubrique}{age<=0}{par date,titre}{id_trad>0}{lang=#ENV{lang}}{doublons 1}>
+			<BOUCLE_article_mois_avec_trad2(ARTICLES) {id_rubrique}{age<=0}{par date,titre}{lang!=#ENV{lang}}{doublons 1}{doublons 2}{id_trad>0}>
+			</BOUCLE_article_mois_avec_trad2>
+		</BOUCLE_article_mois_avec_trad>
+		[(#REM)Si pas de traduction dans la langue courante, fait afficher l'origine de traduction]
+			<BOUCLE_article_mois_avec_trad3(ARTICLES) {id_rubrique}{age<=0}{par date,titre}{origine_traduction}{id_trad>0}{doublons 3}>
+			<BOUCLE_article_mois_avec_trad4(ARTICLES){id_trad}{doublons 3}{doublons 3#ID_TRAD}>
+			</BOUCLE_article_mois_avec_trad4>
+			</BOUCLE_article_mois_avec_trad3>
+		<//B_article_mois_avec_trad>			
+						<BOUCLE_article_annes_all(ARTICLES) {id_rubrique}{age<=0}{par date}>
+						
+
+					<B_article_recent_all>
+					<div class="events">
+						<ul>
+						<BOUCLE_article_recent_all(ARTICLES) {id_rubrique}{age<=0}{mois_relatif>=0}{par date}{unique}>			
+							<B_article_mois_all>
+							[<li class="titre"><h2>(#DATE|affdate_mois_annee|unique)</h2></li>]										
+							<BOUCLE_article_mois_all(ARTICLES) {id_rubrique}{age<=0}{mois_relatif=0}{doublons 2}{doublons 3#ID_TRAD}{par date,titre}>
+                                                      [<li>[<b>(#DATE|jour)</b> - ] <a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">(#TITRE|unique)</a>
+						      [(#LANG|!=={#ENV{lang}}|?{[ - (#LANG|traduire_nom_langue)]})]
+                                                      <small>[<br /><:par_auteur:> (#LESAUTEURS)]</small></li>]
+						      	</BOUCLE_article_mois_all>
+						      	<//B_article_mois_all>						      	
+    						</BOUCLE_article_recent_all>				
+						</ul>
+					</div>
+				</B_article_annes_all>
+	
+				</BOUCLE_article_annes_all>
+				   <:no_event:>
+				<//B_article_annes_all>    	
+            </BOUCLE_rubrique>
+                        </div>
+            </B_rubrique>
+   		<br class="nettoyeur">        

@@ -1,0 +1,38 @@
+#CACHE{24*3600}
+      <B_rubrique>
+			<div>
+            <BOUCLE_rubrique(RUBRIQUES) {id_rubrique} {par num titre, titre}>            
+            [(#REM) Melange les anciens evenements et activités pour affichage homologue]
+            <BOUCLE_auteurs_lies_eecj(AUTEURS) {id_groupe=5}{id_mot!=19}>[(#REM) Selection vieux evenements de ECCJ,membres ECCJ ou plateformes]
+              <BOUCLE_articles_evenements_anciens(ARTICLES) {id_rubrique=17} {id_auteur} {age>0}{lang}{doublons affichage_evenements}>
+              </BOUCLE_articles_evenements_anciens>
+            </BOUCLE_auteurs_lies_eecj>           
+            <BOUCLE_articles_activites(ARTICLES) {branche} {age>0}{lang}{doublons activites}>[(#REM) Selection activites]</BOUCLE_articles_activites>
+            <BOUCLE_exclus(ARTICLES){doublons affichage_evenements}{doublons activites} {doublons exclus1}{doublons exclus2}>[(#REM) Melange des deux pour exclusion]
+            </BOUCLE_exclus>
+              <BOUCLE_sous_rubrique(RUBRIQUES) {id_parent} {par num titre, titre}>
+                    #TITRE
+
+<INCLURE{fond=inc/contenu/inc-rubrique_activites_sous_rubrique}{id_rubrique=3}>
+
+				[(#REM) Articles de la rubrique ]
+				<B_articles>
+                                <br class="nettoyeur" />
+				<div>
+					#ANCRE_PAGINATION
+					<h2 class="invisible"><:articles_rubrique:></h2>
+					<ul>
+						<BOUCLE_articles(ARTICLES){age>0}{!par date}{pagination 10}{lang}{doublons exclus1}>
+						<li>
+							<h3 class="titre"><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
+							<small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small>
+						</li>
+						</BOUCLE_articles>
+					</ul>
+					[<p class="pagination">(#PAGINATION)</p>]
+				</div>
+				</B_articles>
+                    </BOUCLE_sous_rubrique>  
+            </BOUCLE_rubrique>
+                        </div>
+            </B_rubrique>

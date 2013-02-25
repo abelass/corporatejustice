@@ -1,0 +1,332 @@
+                <ul  class="home top">	
+
+           <BOUCLE_rubrique_activites(RUBRIQUES) {id_rubrique=1}>[(#REM) La derni?re activit?]#SET{titre,#TITRE}
+
+            [(#REM) Melange les anciens evenements et activit?s pour affichage homologue]
+
+            <BOUCLE_auteurs_lies_eecj(AUTEURS) {id_groupe=5}{id_mot!=19}>[(#REM) Selection vieux evenements de ECCJ,membres ECCJ ou plateformes]
+
+              <BOUCLE_articles_evenements_anciens(ARTICLES) {id_rubrique=17} {id_auteur} {age>0}{lang}{doublons affichage_evenements}>
+
+              </BOUCLE_articles_evenements_anciens>
+
+            </BOUCLE_auteurs_lies_eecj>           
+
+            <BOUCLE_articles_activites(ARTICLES) {branche} {id_rubrique!=4}{age>=0}{lang}{doublons activites}>[(#REM) Selection activites]
+
+            </BOUCLE_articles_activites>
+
+            <BOUCLE_exclus(ARTICLES){doublons affichage_evenements}{doublons activites} {doublons exclus}>[(#REM) Melange des deux pour exclusion]
+
+            </BOUCLE_exclus>
+
+	    <BOUCLE_na(ARTICLES) {id_mot=93}{doublons filtrerna}{doublons filtrerna2}{doublons filtrerna3}{doublons filtrerna4}></BOUCLE_na>
+
+                  <B_activites_plus_recents>
+
+	  
+
+	                    <li class="left">	
+
+			<h1>[(#TITRE|supprimer_numero)]</h1>	
+
+                  <BOUCLE_activites_plus_recents(ARTICLES){0,1}{!par date}{lang}{doublons exclus}{doublons filtrerna}>				
+
+                    <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
+
+                    <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+
+		    <p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+			<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
+
+                  </BOUCLE_activites_plus_recents> 
+
+                    </li>	
+
+                  </B_activites_plus_recents>
+
+
+
+		  <BOUCLE_alter1(RUBRIQUES) {id_rubrique=12} {doublons}{tout}>                    <li class="left">	
+
+		  <h2 class="titre">[(#TITRE|supprimer_numero)]</h2>
+
+		    <p>[(#LOGO_RUBRIQUE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+			<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="TITRE">#TITRE</a></small></p></li>
+
+		  </BOUCLE_alter1>
+
+                  <//B_activites_plus_recents> 			  
+
+		</BOUCLE_rubrique_activites>
+
+          
+
+			[(#REM) Le prochain ?venements, le plus proche mis en ?vidence]
+
+           <BOUCLE_rubrique_evenements(RUBRIQUES) {id_rubrique=17}>	#SET{titre17,#TITRE}
+
+	   <BOUCLE_filtre_auteur(AUTEURS) {id_groupe=5}><BOUCLE_art(ARTICLES) {lang}{id_rubrique}{id_auteur}{doublons filtrer}></BOUCLE_art></BOUCLE_filtre_auteur>
+
+	   <BOUCLE_art2(ARTICLES) {id_rubrique}{doublons filtrer}{doublons afficher}></BOUCLE_art2>
+
+	   <BOUCLE_art3(ARTICLES) {id_rubrique}{id_mot=93}{doublons filtrer2}></BOUCLE_art3>
+
+                <B_evenements_futurs_plus_recent>
+
+                    <li class="right">
+
+                <h1>[(#TITRE|supprimer_numero)]</h1>	
+
+                  <BOUCLE_evenements_futurs_plus_recent(ARTICLES) {age<=0}{doublons afficher}{doublons filtrer2}{doublons filtrerna2}{id_rubrique}{0,1}{par date}{lang}{doublons}> 					
+
+                    <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
+
+                    <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+
+		    <p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+			<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre17}">#GET{titre17}</a></small></p>
+
+
+
+                  </BOUCLE_evenements_futurs_plus_recent>
+
+                     </li>            
+
+                </B_evenements_futurs_plus_recent>
+
+
+
+		  <BOUCLE_alter2(RUBRIQUES) {id_rubrique=38} {doublons}{tout}>                    <li class="right">	
+
+		  <h2 class="titre">[(#TITRE|supprimer_numero)]</h2>
+
+		    <p>[(#LOGO_RUBRIQUE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+			<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="TITRE">#TITRE</a></small></p></li>
+
+		  </BOUCLE_alter2>
+
+                 <//B_evenements_futurs_plus_recent>
+
+
+
+          </BOUCLE_rubrique_evenements>
+
+     					<li class="clear">  </li>
+
+				
+
+				</ul>
+
+				
+
+				<ul class="home bottom">     
+
+          			[(#REM) Le derniers comuniqu? de presse]
+
+           <BOUCLE_rubrique_medias(RUBRIQUES) {id_rubrique=9}> 	#SET{titre6,#TITRE}
+
+                <B_dernier_communique>
+
+                    <li class="left">
+
+                <h1>[(#TITRE|supprimer_numero)]</h1>
+
+                  <BOUCLE_dernier_communique(ARTICLES) {id_rubrique} {age<180}{id_rubrique!=10}{0,1}{!par date}{lang}{doublons filtrerna2}{doublons}> 					
+
+                    <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
+
+                    <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+
+		    <p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+			<:see_more:> <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre6}">#GET{titre6}</a></small></p>
+
+                  </BOUCLE_dernier_communique>
+
+                    </li>                                                                
+
+                </B_dernier_communique>
+
+					  <BOUCLE_alter3(RUBRIQUES) {id_rubrique=11} {doublons}{tout}>
+
+		                      <li class="left">
+
+		  <h1>[(#TITRE|supprimer_numero)]<br/></h1>
+
+		    <p>[(#LOGO_RUBRIQUE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+			<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="TITRE">#TITRE</a></small></p></li>
+
+		  </BOUCLE_alter3>
+
+			</B_alter3>
+
+		  		  <BOUCLE_alter_alter3(RUBRIQUES) {id_rubrique=37} {doublons}{tout}>
+
+				                      <li class="left">
+
+		   <h1>[(#TITRE|supprimer_numero)]</h1>
+
+		    #FORMULAIRE_ABONNEMENT</li>
+
+				</BOUCLE_alter_alter3>
+
+				</B_alter_alter3>
+
+							  		  <BOUCLE_alter_alter_alter3(RUBRIQUES) {id_rubrique=23} {doublons}{tout}>
+
+				                      <li class="left">
+
+						 <h1>[(#TITRE|supprimer_numero)]</h1>
+
+					<p>[(#LOGO_RUBRIQUE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+						 [(#INTRODUCTION)]<br/><small>
+
+					<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="TITRE">#TITRE</a></small></p></li>
+
+									</BOUCLE_alter_alter_alter3>
+
+									</B_alter_alter_alter3>
+
+										<//B_alter_alter_alter3>
+
+				<//B_alter_alter3>
+
+			<//B_alter3>
+
+		                <//B_dernier_communique>
+
+                
+
+
+
+           </BOUCLE_rubrique_medias>                                 
+
+			[(#REM) Les 6 derni?res publications, la derni?re mise en ?vidence]
+
+           <BOUCLE_rubrique_publications(RUBRIQUES) {id_rubrique=5}>	#SET{titre5,#TITRE}
+
+                <B_dernieres_publications_plus_recente>
+
+                    <li class="right">
+
+                <h1>[(#TITRE|supprimer_numero)]</h1>
+
+
+
+                  <BOUCLE_dernieres_publications_plus_recente(ARTICLES) {branche} {id_rubrique!=10}{0,1}{!par date}{lang}{doublons}{doublons publ}{doublons filtrerna3}> 		
+
+                    <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+
+		    <br/>
+
+                    <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+
+		    <p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+		<:see_more:> <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre5}">#GET{titre5}</a></small></p>
+
+                  </BOUCLE_dernieres_publications_plus_recente>
+
+                    </li>
+
+                </B_dernieres_publications_plus_recente> 
+
+				<BOUCLE_alter4(RUBRIQUES) {id_rubrique=11} {doublons}{tout}>
+
+		                      <li class="right">
+
+		   <h1>[(#TITRE|supprimer_numero)]</h1>
+
+		    <p>[(#LOGO_RUBRIQUE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+                    [(#INTRODUCTION)]<br/><small>
+
+			<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="TITRE">#TITRE</a></small></p></li>
+
+			</BOUCLE_alter4>
+
+			</B_alter4>
+
+		  		  <BOUCLE_alter_alter4(RUBRIQUES) {id_rubrique=37} {doublons}{tout}>
+
+				                      <li class="right">
+
+		   <h1>[(#TITRE|supprimer_numero)]</h1>
+
+		    #FORMULAIRE_ABONNEMENT
+
+</li>
+
+				</BOUCLE_alter_alter4>			
+
+				</B_alter_alter4>
+
+							  		  <BOUCLE_alter_alter_alter4(RUBRIQUES) {id_rubrique=23} {doublons}{tout}>
+
+				                      <li class="right">
+
+						 <h1>[(#TITRE|supprimer_numero)]</h1>
+
+					<p>[(#LOGO_RUBRIQUE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+						 [(#INTRODUCTION)]<br/><small>
+
+					<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="TITRE">#TITRE</a></small></p></li>
+
+									</BOUCLE_alter_alter_alter4>
+
+		</B_alter_alter_alter4>
+
+
+
+<BOUCLE_alter_alter_alter_alter4(RUBRIQUES) {id_rubrique=15} {doublons}{tout}>
+
+				                      <li class="right">
+
+						 <h1>[(#TITRE|supprimer_numero)]</h1>
+
+					<p>[(#LOGO_RUBRIQUE||image_reduire{150,113}|inserer_attribut{align,left})]
+
+						 [(#INTRODUCTION)]<br/><small>
+
+					<:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="TITRE">#TITRE</a></small></p></li>
+
+									</BOUCLE_alter_alter_alter_alter4>
+
+									
+
+	<//B_alter_alter_alter4>									<//B_alter_alter4>
+
+										
+
+			<//B_alter4>
+
+		                <//B_dernieres_publications_plus_recente>  
+
+          </BOUCLE_rubrique_publications>
+
+     					<li class="clear"> </li>
+
+                </ul>
+

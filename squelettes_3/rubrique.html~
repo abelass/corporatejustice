@@ -1,0 +1,242 @@
+#CACHE{24*3600*7} 
+<BOUCLE_rubrique_principal(RUBRIQUES) {id_rubrique}{tout}{id_rubrique !IN 32,34,33,39}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+<meta name="description" content="[(#INTRODUCTION|?{[(#INTRODUCTION|textebrut)],[(#DESCRIPTIF_SITE_SPIP|textebrut)]})]" />
+<INCLURE{fond=inc/inc-head}>
+[(#REM) Lien vers le flux RSS de la rubrique ]
+<link rel="alternate" type="application/rss+xml" title="<:syndiquer_rubrique:>" href="[(#URL_PAGE{backend}|parametre_url{id_rubrique,#ID_RUBRIQUE})]" />
+</head>
+
+<body class="section#ID_RUBRIQUE">
+<div id="topLeft">  </div>
+	<div id="page-wrap">
+		<div id="inside">
+			<div id="left-sidebar">
+				<INCLURE {fond=inc/menus/inc-menu_langues}{id_rubrique}>
+      			[(#REM) Menu de navigation]
+				<INCLURE{fond=/inc/menus/inc-menu_laterale}{id_rubrique}>
+			</div>
+
+	<div id="main-content">
+	[(#REM) Entete de la page + titre du site ]
+	
+	<INCLURE{fond=inc/inc-entete}{id_rubrique=#ID_RUBRIQUE}{id_rubrique}>
+	
+	<div id="content">
+	<INCLURE {fond=inc/inc-photos}{lang=en}>
+	
+	<div id="breadcrumb">
+	        <BOUCLE_ariane_default(RUBRIQUES) {id_rubrique} {id_mot !IN 6,13,59,53}{tout}{0,1}>
+        	<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_rubrique}> > <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ > (#TITRE|couper{80})]
+        	</BOUCLE_ariane_default>
+	         <BOUCLE_ariane_default_sous_rubriques(RUBRIQUES) {id_rubrique}{tout}>#SET{id_rubrique,#ID_RUBRIQUE}
+        	<BOUCLE_ariane_default_principale(RUBRIQUES) {id_enfant}{id_mot !IN 6} {tout}>
+		<BOUCLE_rub_princ(RUBRIQUES) {id_rubrique=#GET{id_rubrique}}{tout}>
+ 		<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane_sr(HIERARCHIE){id_rubrique}> > <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane_sr>[ > (#TITRE|couper{80})]
+ 		</BOUCLE_rub_princ>
+          	</BOUCLE_ariane_default_principale>
+        	</BOUCLE_ariane_default_sous_rubriques>
+	
+		 <BOUCLE_ariane_cj_rub(RUBRIQUES) {id_rubrique} {id_mot IN 6}{tout}>
+		<a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane_cj(HIERARCHIE){id_rubrique}> > <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane_cj>
+		[(#ENV{periode}|=={''}|?{'',' '})<INCLURE{fond=inc/contenu/inc-ariane_cj}{id_rubrique}{periode=#ENV{periode}}>]
+		[(#ENV{periode}|=={''}|?{[ > (#TITRE|couper{80})],' '})]
+        	</BOUCLE_ariane_cj_rub>
+		</div>
+		
+		[(#REM) Contenu principal : contenu de la rubrique ]
+
+        [(#REM) Titre, texte, notes par default]
+        <BOUCLE_contenu_default(RUBRIQUES) {id_rubrique} {id_mot !IN 6,53,13,54,35,59}{tout}{0,1}>
+        <INCLURE{fond=inc/contenu/inc-rubrique_default}{id_rubrique}>
+        </BOUCLE_contenu_default>
+	
+         <BOUCLE_contenu_default_sous_rubriques(RUBRIQUES) {id_rubrique}{id_rubrique !IN 15,20}{tout}>#SET{id_rubrique,#ID_RUBRIQUE}
+        <BOUCLE_contenu_default_principale(RUBRIQUES) {id_enfant}{id_mot !IN 6,13,35,59} {tout}>
+        <INCLURE{fond=inc/contenu/inc-rubrique_default}{id_rubrique=#GET{id_rubrique}} >
+          </BOUCLE_contenu_default_principale>
+        </BOUCLE_contenu_default_sous_rubriques>
+	
+ 	[(#REM) Titre, texte, notes par default, dans sous rubriques de rubrique Our work]
+	        <BOUCLE_section_act(RUBRIQUES) {id_rubrique} {id_mot IN 35}>
+	<INCLURE{fond=/inc/menus/inc-menu_laterale_act}{id_rubrique}>
+	<div class="twoColumnsLeft">
+        <INCLURE{fond=inc/contenu/inc-rubrique_default}{id_rubrique}{self=#SELF}>
+		</div>
+        </BOUCLE_section_act>
+        
+	 [(#REM) barre droite pour Get involved]
+	        <BOUCLE_rubriques_sous_rubriques_act(RUBRIQUES) {id_rubrique}{tout}>#SET{id_rubrique,#ID_RUBRIQUE}        
+          <BOUCLE_rubriques_principale_act(RUBRIQUES) {id_enfant} {id_mot IN 35}{tout}>
+<INCLURE{fond=inc/menus/inc-menu_laterale_act}{id_rubrique=#GET{id_rubrique}}>
+	<div class="twoColumnsLeft">
+        <INCLURE{fond=inc/contenu/inc-rubrique_default}{id_rubrique=#GET{id_rubrique}}>
+		</div>
+          </BOUCLE_rubriques_principale_act>
+        </BOUCLE_rubriques_sous_rubriques_act>
+		
+	 [(#REM) Titre, texte, notes par default, dans sous rubriques de rubrique Our work]
+	 
+	[(#ID_RUBRIQUE|=={20}|?{' ',''})<h2>#TITRE</h2><INCLURE{fond=inc/contenu/inc-rubrique_our_work}{id_rubrique}{id_groupe=6}{priorities=#ENV{priorities}} {self=#SELF}>]
+	[(#ID_RUBRIQUE|=={20}|?{' ',''})[(#ENV{priorities}|!=={''}|?{' ',''})<div class="twoColumnsLeft"><INCLURE{fond=inc/contenu/inc-rubrique_thematic_priorities}{id_rubrique}{priorities=#ENV{priorities}}{self=#SELF}></div>]]
+	[(#REM) Titre, texte, notes par default, dans sous rubriques de rubrique Thematic priorities]
+	[(#ID_RUBRIQUE|=={23}|?{' ',''})<h2>#TITRE</h2><INCLURE{fond=inc/contenu/inc-rubrique_our_work}{id_rubrique}{id_groupe=2}{priorities=#ENV{priorities}}>]	
+        [(#ID_RUBRIQUE|=={23}|?{' ',''})[(#ENV{priorities}|!=={''}|?{' ',''})<div class="twoColumnsLeft"><INCLURE{fond=inc/contenu/inc-rubrique_thematic_priorities}{id_rubrique}{priorities=#ENV{priorities}}{self=#SELF}></div>]]
+	
+        [(#REM) Contenu rubrique CJ at European level]
+        
+	<BOUCLE_contenu_cj_eu_level(RUBRIQUES) {id_rubrique} {id_mot=6}> 
+	<div class="twoColumnsRight">	
+         [
+         	<p>(#ENV{list}|=={date}|oui)<a href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{lang,#ENV{lang}}|parametre_url{list,name})]" title="select by name"><:nom:></a></p>
+         ]
+         [
+         	<p><a href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{lang,#ENV{lang}}|parametre_url{list,date})]" title="select by name">(#ENV{list}|!=={date}|oui)
+         	[(#ENV{list}|=={'name'}|?{<:key_docs_date:>,<:key_docs:>})
+         	]</a>
+         	</p>
+         ]
+		<div class="line"> </div>
+		 <B_sous_rubriques_CJ_Eu_Level>
+			<ul>
+                              <BOUCLE_sous_rubriques_CJ_Eu_Level(MOTS) {id_groupe=7} {par num titre}{tout}>
+                                [(#ENV{periode}|=={#ID_MOT}|?{<li class="on">[(#TITRE|couper{80})]</li>,<li><a  href="[(#URL_RUBRIQUE|parametre_url{periode,#ID_MOT}|parametre_url{lang,#ENV{lang}})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>})</li>]
+                                </BOUCLE_sous_rubriques_CJ_Eu_Level>
+				</ul>
+                                </B_sous_rubriques_CJ_Eu_Level>
+	 </div>
+	       <div class="twoColumnsLeft">
+	       
+	        [(#ENV{periode}|!=={all}|oui)
+	        	[(#ENV{periode}|=={''}|oui)
+	        	<h2>#TITRE</h2>
+	        	<INCLURE{fond=inc/contenu/inc-rubrique_cj_eu_level_default}{id_rubrique}{id_groupe=7}>]
+	        ]  
+        	[(#ENV{periode}|=={all}|oui)
+        		[(#ENV{list}|=={date}|oui)
+        		<INCLURE{fond=inc/contenu/inc-rubrique_cj_eu_level_all_doc}{id_rubrique}{list=#ENV{list}}  {self=#SELF}>
+        		]
+        	]
+                [(#ENV{list}|=={name}|oui)
+                	<INCLURE{fond=inc/contenu/inc-rubrique_cj_eu_level_all_doc_par_auteur}{id_rubrique}{list=#ENV{list}} {name=#ENV{name}} {id_auteur=#ENV{id_auteur}}{self=#SELF}>
+                ]
+                [(#ENV{list}|=={all}|oui)
+                	<INCLURE{fond=inc/contenu/inc-rubrique_cj_eu_level_all_doc_par_auteur_all}{id_rubrique}{list=#ENV{list}} {self=#SELF}>
+                ]
+		 [(#ENV{periode}|=={''}|non)
+		 	[(#ENV{list}|=={''}|oui)
+		 	<h2>#TITRE</h2>
+		 	<INCLURE{fond=inc/contenu/inc-rubrique_cj_eu_level}{id_rubrique}{periode=#ENV{periode}} {self=#SELF}>
+		 	]
+		 ]
+		</div>
+        </BOUCLE_contenu_cj_eu_level>
+        
+        [(#REM) Liste rubriques avec articles des sous rubriques, Section  Publications]
+        <BOUCLE_liste_article_tout(RUBRIQUES) {id_rubrique} {id_mot IN 8}>
+        <INCLURE{fond=inc/contenu/inc-rubrique_liste_tout}{env}{ajax}>
+        </BOUCLE_liste_article_tout>
+	
+	        [(#REM) Liste rubriques avec articles des sous rubriques, Section  Media]
+        <BOUCLE_liste_article_medias(RUBRIQUES) {id_rubrique} {id_mot=3}>
+        <INCLURE{fond=inc/contenu/inc-rubrique_media}{id_rubrique}>
+        </BOUCLE_liste_article_medias>
+        
+        [(#REM) Liste rubriques avec articles des sous rubriques, Section Activit?s]
+        <BOUCLE_liste_article_activites(RUBRIQUES) {id_rubrique} {id_mot IN 2}>
+        <INCLURE{fond=inc/contenu/inc-rubrique_activites}{id_rubrique}>
+        </BOUCLE_liste_article_activites>
+        
+        [(#REM) Liste articles des sous rubriques, Section Activités]
+        <BOUCLE_activites_sous_rubriques(RUBRIQUES) {id_rubrique}>#SET{id_rubrique,#ID_RUBRIQUE}        
+          <BOUCLE_activites_principale(RUBRIQUES) {id_enfant} {id_mot IN 2}>
+          [(#GET{id_rubrique}|=={3}|?{' '})<INCLURE{fond=inc/contenu/inc-rubrique_activites_sous_rubrique}{id_rubrique=#GET{id_rubrique}}{env}{id_mot=20}{ajax}>]
+          [(#GET{id_rubrique}|=={2}|?{' '})<INCLURE{fond=inc/contenu/inc-rubrique_activites_sous_rubrique}{id_rubrique=#GET{id_rubrique}}{env}{id_mot=17}{ajax}>]
+          [(#GET{id_rubrique}|=={4}|?{' '})<INCLURE{fond=inc/contenu/inc-rubrique_activites_sr_particpated}{id_rubrique=#GET{id_rubrique}}{env}{id_mot=29}{ajax}>]          
+          </BOUCLE_activites_principale>
+        </BOUCLE_activites_sous_rubriques>
+        
+        [(#REM) Liste articles des sous rubriques, Section  Publications]
+        <BOUCLE_rubriques_sous_rubriques(RUBRIQUES) {id_rubrique}>#SET{id_rubrique,#ID_RUBRIQUE}        
+          <BOUCLE_rubriques_principale(RUBRIQUES) {id_enfant} {id_mot IN 8}>
+          <INCLURE{fond=inc/contenu/inc-rubrique_liste_sous_rubriques}{id_rubrique=#GET{id_rubrique}}{env} {ajax}>
+          </BOUCLE_rubriques_principale>
+        </BOUCLE_rubriques_sous_rubriques>
+	
+	        [(#REM) Liste articles des sous rubriques, Section  Médias]
+        <BOUCLE_rubriques_sous_rubriques_medias(RUBRIQUES) {id_rubrique}>#SET{id_rubrique,#ID_RUBRIQUE}        
+          <BOUCLE_rubriques_principale_medias(RUBRIQUES) {id_enfant} {id_mot=3}>
+          [(#GET{id_rubrique}|=={9}|?{'  ',''})<INCLURE{fond=inc/contenu/inc-rubrique_medias_sous_rubriques}{id_rubrique=#GET{id_rubrique}}{env}{ajax}>]
+          [(#GET{id_rubrique}|=={10}|?{'  ',''})<INCLURE{fond=inc/contenu/inc-rubrique_medias_sous_rubriques_in_press}{id_rubrique=#GET{id_rubrique}}{env}{ajax}>]	  
+          </BOUCLE_rubriques_principale_medias>
+        </BOUCLE_rubriques_sous_rubriques_medias>
+
+
+        [(#REM) Contenu sous rubriques de la rubrique Membres]  
+         <BOUCLE_rubrique_principale_membres(RUBRIQUES) {id_rubrique} {id_mot=13} {tout}>
+	      <div class="twoColumnsRight">
+		<BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
+        	[(#ENV{id_mot}|=={''}|?{' '})[(#ENV{list}|!=={all}|?{' '})<p><a [class="(#ENV{list}|=={all}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{list,all})]" title="all"><:all_members:></a></p>]]
+		</BOUCLE_rubrique>
+ 		</div> 
+	[(#ENV{id_mot}|!=={''}|?{' '})<INCLURE{fond=inc/contenu/inc-rubrique_membres_sel}{id_rubrique}{id_mot=#ENV{id_mot}}>]
+	[(#ENV{id_groupe}|=={4}|?{' '})<INCLURE{fond=inc/contenu/inc-rubrique_membres_sel}{id_rubrique}{id_groupe=#ENV{id_groupe}}>]
+       	[(#ENV{id_mot}|=={''}|?{' '})
+       		[(#ENV{list}|!=={all}|?{' '})
+       			[(#ENV{id_groupe}|=={''}|?{' '})
+      			<INCLURE{fond=inc/contenu/inc-rubrique_membres}{id_rubrique}><INCLURE{fond=inc/contenu/inc-rubrique_membres_sel}{id_rubrique}{id_groupe=4}>
+       			]
+       		]
+       ]
+       
+       [(#ENV{list}|=={all}|?{' '})<INCLURE{fond=inc/contenu/inc-rubrique_membres_all}{id_rubrique}{list=#ENV{list}}>]
+	</BOUCLE_rubrique_principale_membres>
+
+	
+        [(#REM) Contenu rubrique Links]  
+        
+        [(#ID_RUBRIQUE|=={'18'}|?{' ',''})
+        	<INCLURE{fond=inc/contenu/inc-rubrique_sites}{id_rubrique}{env}{ajax}>
+        	<INCLURE{fond=inc/inc-rubrique_sites_syndique_menu_sel}{env}{section=#ENV{section}}{ajax}>
+        ]
+        
+	[(#REM) Contenu rubrique Events]  
+        [(#ID_RUBRIQUE|=={'17'}|?{' ',''})<INCLURE{fond=inc/contenu/inc-rubrique_evenements}{id_rubrique}{self=#SELF}{lang=#ENV{lang}}>]        
+	
+	[(#REM) Contenu Intranet]  
+	
+	[(#REM) Page d'accueil]  
+	[(#ID_RUBRIQUE|=={31}|?{' ',''})<INCLURE{fond=inc/contenu/inc-rubrique_intranet}{id_rubrique}>]
+	[(#REM) Page d'accueil agenda]  
+	[(#ID_RUBRIQUE|=={33}|?{' ',''})<INCLURE{fond=inc/contenu/inc-rubrique_agenda}{id_rubrique} {self=#SELF}{date=#ENV{date}}>]
+
+	[(#ID_RUBRIQUE|=={37}|?{' ' ,''})#FORMULAIRE_ABONNEMENT]
+	
+	[(#REM) Contenu International News]  
+
+	[(#ID_RUBRIQUE|=={40}|?{' ',''})<INCLURE{fond=inc/contenu/inc-rubrique_international_news}{id_rubrique}{env}{ajax}>]
+	
+				<div class="last">  </div>
+		</div><!-- fin content-->
+
+
+		[(#REM) Pied de page ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
+			<div class="clear">  </div> 
+	</div><!-- end main-content -->
+	</div><!-- fin inside -->
+	</div><!-- page-wrap -->
+</body>
+</html>
+</BOUCLE_rubrique_principal>
+[(#ID_RUBRIQUE|=={32}|oui)<INCLURE{fond=rubrique=32}{env}/>]
+[(#ID_RUBRIQUE|=={34}|oui)<INCLURE{fond=rubrique-34}{env}/>]
+[(#ID_RUBRIQUE|=={33}|oui)<INCLURE{fond=rubrique-33}{env}/>]
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{' ',''})    
+#LOGIN_PUBLIC]
+[(#ID_RUBRIQUE|AccesRestreint_rubrique_restreinte|?{'',' '})
+<center>Page does not exist, please go back to the <a href="#URL_SITE_SPIP" title="#URL_SITE"> Home Page</a></center> ]
+<//B_rubrique_principal>
