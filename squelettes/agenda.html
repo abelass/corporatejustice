@@ -7,11 +7,70 @@
 [<meta name="description" content="(#DESCRIPTIF_SITE_SPIP|couper{150}|textebrut)" />]
 <INCLURE{fond=inc/inc-head}>
 <meta name="robots" content="none" />
-<link rel="stylesheet" href="#CHEMIN{agenda.css}" type="text/css" /> 
-<link rel="stylesheet" href="#CHEMIN{img_pack/agenda.css}" type="text/css" /> 
-<link rel="stylesheet" href="#CHEMIN{img_pack/calendrier.css}" type="text/css" /> 
-<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}layer.js"> </script> 
-<script type="text/javascript" src="#EVAL{_DIR_JAVASCRIPT}presentation.js"> </script> 
+<link rel='stylesheet' type='text/css' href='#CHEMIN{js/css/fullcalendar.css}' />
+<script type='text/javascript' src='#CHEMIN{js/fullcalendar.min.js}'></script>
+<script type="text/javascript">/*<![CDATA[*/
+jQuery(document).ready(function() {
+
+    
+    $('#agenda').fullCalendar({
+            editable: false,
+            events: "[(#URL_PAGE{agenda.json})]",
+            header: {
+                left: 'prevYear,prev,next,nextYear today',
+                center: 'title',
+                right: 'month,agendaWeek,agendaDay'
+            },
+            firstDay: 1,
+            monthNames:['<:date_mois_1|attribut_html:>','<:date_mois_2|attribut_html:>','<:date_mois_3|attribut_html:>','<:date_mois_4|attribut_html:>','<:date_mois_5|attribut_html:>','<:date_mois_6|attribut_html:>','<:date_mois_7|attribut_html:>','<:date_mois_8|attribut_html:>','<:date_mois_9|attribut_html:>','<:date_mois_10|attribut_html:>','<:date_mois_11|attribut_html:>','<:date_mois_12|attribut_html:>'],
+            monthNamesShort:['<:date_mois_1_abbr|attribut_html:>','<:date_mois_2_abbr|attribut_html:>','<:date_mois_3_abbr|attribut_html:>','<:date_mois_4_abbr|attribut_html:>','<:date_mois_5_abbr|attribut_html:>','<:date_mois_6_abbr|attribut_html:>','<:date_mois_7_abbr|attribut_html:>','<:date_mois_8_abbr|attribut_html:>','<:date_mois_9_abbr|attribut_html:>','<:date_mois_10_abbr|attribut_html:>','<:date_mois_11_abbr|attribut_html:>','<:date_mois_12_abbr|attribut_html:>'],
+            dayNames:['<:date_jour_1|attribut_html:>','<:date_jour_2|attribut_html:>','<:date_jour_3|attribut_html:>','<:date_jour_4|attribut_html:>','<:date_jour_5|attribut_html:>','<:date_jour_6|attribut_html:>','<:date_jour_7|attribut_html:>'],
+            dayNamesShort:['<:date_jour_1_abbr|attribut_html:>','<:date_jour_2_abbr|attribut_html:>','<:date_jour_3_abbr|attribut_html:>','<:date_jour_4_abbr|attribut_html:>','<:date_jour_5_abbr|attribut_html:>','<:date_jour_6_abbr|attribut_html:>','<:date_jour_7_abbr|attribut_html:>'],
+            buttonText: {
+                    today: '<:date_aujourdhui|attribut_html:>',
+                    month: '<:organiseur:cal_par_mois|attribut_html:>',
+                    day: '<:organiseur:cal_par_jour|attribut_html:>',
+                    week: '<:organiseur:cal_par_semaine|attribut_html:>'
+            },
+            weekMode : 'liquid',
+            loading: function(bool) {
+                if (bool) $('#calendrier-loading').show();
+                else $('#calendrier-loading').hide();
+            },
+            timeFormat: {
+                
+                agenda: "H'h'mm{ - H'h'mm}", 
+                
+                '': "H'h'(mm)" 
+            },
+            axisFormat: "H'h'(mm)",
+            allDayText:'<:organiseur:cal_jour_entier|attribut_html:>',
+            columnFormat: {
+                month: 'ddd',    
+                week: 'ddd d/M', 
+                day: 'dddd d/M'  
+            },
+            titleFormat: {
+                month: 'MMMM yyyy',                             
+                week: "d [ MMM] [ yyyy]{ '&#8212;' d MMM yyyy}", 
+                day: 'dddd d MMM yyyy'                  
+            },
+            dayClick: function(date, allDay, jsEvent, view) {
+                if(view.name=='month'){
+                    $('.fc-button-agendaWeek').click();
+                    $('#calendrier').fullCalendar( 'gotoDate', date );
+                }
+                else
+                    if(view.name=='agendaWeek'){
+                        $('.fc-button-agendaDay').click();
+                        $('#calendrier').fullCalendar( 'gotoDate', date );
+                    }
+            },
+            isRTL : [(#LANG_DIR|=={rtl}|?{true,false})]
+    })
+
+});
+/*]]>*/</script>
 </head>
 
 <body class="page_agenda">
@@ -32,10 +91,10 @@
 			</div>
 			    	<div id="main-content">
 		<INCLURE{fond=inc/menus/inc-menu_intranet}{id_rubrique}>
-			<div id="content"	
+			<div id="content">
 	<div id="breadcrumb"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique=33}> <BOUCLE_ariane_sup(RUBRIQUES){id_enfant}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane_sup> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
 
-[(#ENV{type, mois}|agenda_connu)<INCLURE {fond=agenda_#ENV{type,mois}} {type} {delais=1800} {annee=#ENV{annee}} {mois=#ENV{mois}} {jour} {echelle} {partie_cal} {theme}{id_rubrique=#ENV{id_rubrique}}>]
+<div id="agenda"> </div>
 	</div><!-- fin content -->
 		[(#REM) Pied de page ]
 	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
