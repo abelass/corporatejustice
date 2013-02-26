@@ -5,7 +5,6 @@
 <ul  class="home top">	
     
     <BOUCLE_objets(SELECTION_OBJETS){objet_dest=rubrique}{id_objet_dest=#ENV{id_rubrique}}{lang}{par ordre}{0,4}>
-    [(#DATE|<{#GET{date}}|oui)#SET{affichage,0}]}
     <li class="[(#COMPTEUR_BOUCLE|alterner{left,right})]">
         [(#ID_OBJET|generer_modele{#OBJET,modeles_so/objet_home,#ARRAY{
                 id_selection_objet,#ID_SELECTION_OBJET,

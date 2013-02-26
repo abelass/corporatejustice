@@ -43,7 +43,7 @@ function regler_langue_navigateur() {
 
 		<BOUCLE_rub(RUBRIQUES){id_rubrique=40}{tout}>				
 		<B_art>
-		<div class="news js-hidden" id="ticker-wrapper">
+		<div class="news" id="ticker-wrapper">
 
 			<ul id="js-news" class="js-hidden">
 					<BOUCLE_art(ARTICLES) {lang}{id_rubrique} {age<=120}{!par date} {0,10}>
@@ -92,17 +92,10 @@ function regler_langue_navigateur() {
 	
 
 	[(#REM) Pied de page ]
-
 	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
-
 		<div class="clear">  </div> 	
 		</div><!-- end main-content -->	
-
 	</div><!-- inside -->
-
 </div><!-- page-wrap -->
-
 </body>
-
 </html>
-

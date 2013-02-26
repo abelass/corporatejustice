@@ -115,13 +115,13 @@ border-bottom-color: #4d4d4d;
 border-right-color: #5e5e5e;
 	;		
 }
-div.news h4 a {
+div.news .ticker-title a {
 	text-decoration: none;
 	text-align:center;	
 	font-size:130%;
 	color:#525759;
+	font-weight:bold;
 
-	
 	
 }
 #ejs_box2_box {
@@ -130,9 +130,10 @@ div.news h4 a {
 }
 
 div.news a {
-	color:white;
 	font-size:120%;
 	margin-top: 10px;
+	text-decoration:none;
+	font-weight:bold
 		
 }
  
