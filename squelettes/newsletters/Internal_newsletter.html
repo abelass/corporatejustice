@@ -15,7 +15,6 @@
 
 #SET{date,#GET{date_today}|affdate{'Y-m'}}
 #SET{var_google,&utm_source=newsletter&utm_medium=email&utm_campaign=internal&utm_term=#GET{date}}
-#DATE
 <table style="width:1000px">
   <tbody style="font-size:13px;">
     <tr style="cell-align:top;">
@@ -25,7 +24,7 @@
         <td colspan="2"  style="cell-align:top;">
             
 
-            View this newsletter <a href="#URL_NEWSLETTER[(#GET{var_google})]">online </a>
+            View this newsletter <a href="[(#URL_RUBRIQUE{49}|parametre_url{id,#ID_NEWSLETTER})][(#GET{var_google})]">online </a>
             <div>login: member</div>
             <div>password: corporatejustice</div>
         </td>
