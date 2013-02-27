@@ -9,6 +9,33 @@
 <meta name="robots" content="none" />
 <link rel='stylesheet' type='text/css' href='#CHEMIN{js/css/fullcalendar.css}' />
 <script type='text/javascript' src='#CHEMIN{js/fullcalendar.min.js}'></script>
+
+</head>
+
+<body class="page_agenda">
+<div id="topLeft">&nbsp;</div>
+<div id="page-wrap">
+		<div id="inside">
+			<div id="left-sidebar">
+	<INCLURE {fond=inc/menus/inc-menu_langues}{id_rubrique}>
+				<div id="mainNavi">
+	<INCLURE{fond=inc/menus/inc-menu_laterale_intranet}{id_rubrique}>
+	<BOUCLE_article (ARTICLES) {id_article=48}>
+<p><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" title="<:monthly_view:>"<:monthly_view:>"><:monthly_view:></a></p>
+<p>[(#ENV{ajout_evenement}=={'oui'}|?{'',' '})
+<a href='[(#URL_ARTICLE|parametre_url{ajout_evenement,oui}|parametre_url{editer,oui})]'><:agenda:titre_cadre_ajouter_evenement:></a>]</p>
+</BOUCLE_article>
+#FORMULAIRE_EDITION_EVENEMENT
+			</div>
+			</div>
+			    	<div id="main-content">
+		<INCLURE{fond=inc/menus/inc-menu_intranet}{id_rubrique}>
+			<div id="content">
+	<div id="breadcrumb"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique=33}> <BOUCLE_ariane_sup(RUBRIQUES){id_enfant}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane_sup> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+<div id="agenda">  </div>
+
+
 <script type="text/javascript">/*<![CDATA[*/
 jQuery(document).ready(function() {
 
@@ -71,30 +98,6 @@ jQuery(document).ready(function() {
 
 });
 /*]]>*/</script>
-</head>
-
-<body class="page_agenda">
-<div id="topLeft">&nbsp;</div>
-<div id="page-wrap">
-		<div id="inside">
-			<div id="left-sidebar">
-	<INCLURE {fond=inc/menus/inc-menu_langues}{id_rubrique}>
-				<div id="mainNavi">
-	<INCLURE{fond=inc/menus/inc-menu_laterale_intranet}{id_rubrique}>
-	<BOUCLE_article (ARTICLES) {id_article=48}>
-<p><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" title="<:monthly_view:>"<:monthly_view:>"><:monthly_view:></a></p>
-<p>[(#ENV{ajout_evenement}=={'oui'}|?{'',' '})
-<a href='[(#URL_ARTICLE|parametre_url{ajout_evenement,oui}|parametre_url{editer,oui})]'><:agenda:titre_cadre_ajouter_evenement:></a>]</p>
-</BOUCLE_article>
-#FORMULAIRE_EDITION_EVENEMENT
-			</div>
-			</div>
-			    	<div id="main-content">
-		<INCLURE{fond=inc/menus/inc-menu_intranet}{id_rubrique}>
-			<div id="content">
-	<div id="breadcrumb"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(RUBRIQUES){id_rubrique=33}> <BOUCLE_ariane_sup(RUBRIQUES){id_enfant}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane_sup> &gt; [(#TITRE|couper{80})]</BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
-
-<div id="agenda"> </div>
 	</div><!-- fin content -->
 		[(#REM) Pied de page ]
 	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
