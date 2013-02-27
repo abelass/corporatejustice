@@ -112,8 +112,7 @@ border: 0.07em solid  #888888;
 border-bottom-width: 2px;
 border-right-width: 2px;
 border-bottom-color: #4d4d4d;
-border-right-color: #5e5e5e;
-	;		
+border-right-color: #5e5e5e;	
 }
 div.news .ticker-title a {
 	text-decoration: none;
@@ -589,6 +588,11 @@ p {
 	margin-left:10px;	
 }
 
+.section49 #content table div{
+	margin-right:0;
+	margin-left:0;
+}
+
 #content div p.spip, #content div div h3, #content div div h4{margin-left:0px;	
 }
 
@@ -738,8 +742,6 @@ ul.home small {padding-top:30px; line-height:3em; }
 .twoColumnsRight ul{
 list-style:none;
 margin-left:15px;
-
-
 
 }
 .twoColumnsRight li{
