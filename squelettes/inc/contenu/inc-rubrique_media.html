@@ -1,5 +1,5 @@
 #CACHE{24*3600}
-<BOUCLE_rub(RUBRIQUES){id_parent}{par num titre}>
+<BOUCLE_rub(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}>
      <B_article_recent7>
 	<div class="item">
 		<h3><a href="[(#URL_RUBRIQUE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
