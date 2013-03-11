@@ -8,6 +8,5 @@ if (!defined('_DELAI_CACHE_resultats')) define('_DELAI_CACHE_resultats',600);
 $GLOBALS['quota_cache']=50;
 if (!defined('_LOGIN_TROP_COURT')) define('_LOGIN_TROP_COURT',4);
 if (!defined('_TRANCHES')) define('_TRANCHES',0);
-mysql_query("SET NAMES UTF8 COLLATE utf8_unicode_ci") ;
 
 ?>
