@@ -33,11 +33,11 @@
 			<B_documents_joints>
 			<div style="clear:left;"> </div>
 			<p id="documents_joints" class="nyroceros">
-				<h2><:titre_documents_joints:></h2>
+				<h2><:medias:titre_documents_joints:></h2>
 				<ul id="carre">
 					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {extension !IN png,jpg,gif}>
 					<li>
-						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{<:info_document:>})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="Download" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename|couper{80})]})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
 						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
 					</li>
 					</BOUCLE_documents_joints>
