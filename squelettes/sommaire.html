@@ -39,35 +39,6 @@ function regler_langue_navigateur() {
 		<INCLURE {fond=inc/menus/inc-menu_langues}>
       		[(#REM) Menu de navigation]
 		<INCLURE{fond=inc/menus/inc-menu_laterale}>
-		
-
-		<BOUCLE_rub(RUBRIQUES){id_rubrique=40}{tout}>				
-		<B_art>
-		<div class="news" id="ticker-wrapper">
-
-			<ul id="js-news" class="js-hidden">
-					<BOUCLE_art(ARTICLES) {lang}{id_rubrique} {age<=120}{!par date} {0,10}>
-					<li class="news-item"><a href="#URL_SITE" class="spip_out">[(#TITRE|texte_script)]</a><br/>[(#DATE|affdate)]<br/>[(#NOM_SITE*|sinon{#LESAUTEURS|textebrut})]</li>
-					</BOUCLE_art>		
-			</ul>
-		</div>
-			<script type="text/javascript">
-				$(function () {
-					$('#js-news').ticker({
-						displayType:'fade',
-						speed: 0.10,
-						fadeInSpeed:600,
-						titleText: '<a href="#URL_RUBRIQUE" title="#TITRE">#TITRE</a>',
-						controls: false
-					});
-				});
-			</script>
-			
-		
-		</B_art>
-		
-
-		</BOUCLE_rub>					
 
 	</div>
 
