@@ -4,18 +4,9 @@
 <ul>
 <B_rubriques>
 
-			<BOUCLE_rubriques23(RUBRIQUES) {id_rubrique=23} {par num titre, titre}{tout}>
-		<li id="nav001" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'class="active",''})]>
-			<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule" ><span>[(#TITRE|image_typo{police=Verdana_Bold.ttf,largeur=94,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{20})]</span></a>
-						<ul>
-				<BOUCLE_sous_rubriques_mots(MOTS) {id_groupe=2} {par num titre, titre}{tout}>
-					<li class="lastNav">
-					<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{priorities,#ID_MOT})]"  >[(#TITRE|supprimer_numero|couper{80})]</a></li>
-				</BOUCLE_sous_rubriques_mots>
-						</ul>
+<INCLURE{fond=inc/inc-entete_thematic,id_rubrique=23}/>
 
-		</li>
-	</BOUCLE_rubriques23>
+
 	<BOUCLE_rubriques11(RUBRIQUES) {id_rubrique=11} {par num titre, titre}{tout}>
 		<li id="nav002"  [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'class="active",''})]>
 			<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule" ><span>[(#TITRE|image_typo{police=Verdana.ttf,largeur=95,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{5})]</span></a>
@@ -54,5 +45,3 @@
 </B_rubriques>
 </ul>
 </div>
-
-

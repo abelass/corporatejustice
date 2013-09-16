@@ -1198,8 +1198,6 @@ float:left;}
 
 .socialbox{float:left;width:150px;overflow:hidden;padding:0 70px;
 
-
-
 }
 
 .socialweb{float:left; text-align:center;margin:0 5px
@@ -1211,3 +1209,48 @@ float:left;}
 .activities .item{
 clear:both;
 }
+
+/*Menu thematic Priorities*/
+
+ul.thematic_priorities{
+	margin:0 3px 0 110px;
+	clear:both;
+	padding-top:2em;
+
+	}
+	
+ul.thematic_priorities a {text-decoration:none;}
+
+ul.thematic_priorities a:hover, ul.thematic_priorities a:active {color:#F5F5F5}
+	
+ul.thematic_priorities li{list-style-type: none;}	
+
+ul.thematic_priorities li#head{
+	background:#CDCDCD;
+	padding-top:3px
+}
+
+
+
+ul.thematic_priorities li#head span{
+		display:block;
+		margin:1em;
+		font-weight:bold
+}
+
+
+
+ul.thematic_priorities ul li{
+		background-color:#CAD808;
+		padding:1em;
+		margin-bottom:1px
+}
+
+ul.thematic_priorities  li#head ul li a{
+		margin:0
+}
+
+.thematic_priorities li#nav001.active {
+    background-image: none;
+}
+
