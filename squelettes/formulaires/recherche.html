@@ -1,9 +1,0 @@
-<form action="[(#ENV{action})]" method="get" id="formulaire_recherche">
-[(#ENV{action}|form_hidden)]
-<div class="search">
-	[(#ENV{lien}|form_hidden)]
-	[<input type="hidden" name="lang" value="(#ENV{lang})" />]
-	<input type="text" class="forml" name="recherche" id="recherche" value="[(#ENV{recherche}|sinon{<:info_rechercher:>" onfocus="this.value='';|{lang})]" /><br/>
-	<p class="advanced"><a  href="?page=recherche&amp;avancee=1&amp;lang=#ENV{lang}&amp;recherche=#RECHERCHE"><:rechercheavancee:recherche_avancee:></a></p>
-</div>
-</form>
