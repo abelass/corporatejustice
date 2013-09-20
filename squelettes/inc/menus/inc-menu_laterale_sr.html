@@ -1,0 +1,14 @@
+
+	<BOUCLE_rub(RUBRIQUES){id_rubrique}>
+	<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a>
+	
+	[(#ENV{id_rubrique}|=={11}|?{' ',''})<INCLURE{fond=squelettes/inc/menus/inc-menu_laterale_ss_cj_elevel} {id_rubrique}{periode=#ENV{periode}}>]
+		
+		<B_sous_rubriques>                              
+			<ul>
+				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par id_rubrique}{tout}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}{tout}>#EXPOSE{' '}</BOUCLE_test_expose>
+					<li [ class="(#EXPOSE)"]><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques){tout}></BOUCLE_re>	</li>
+				</B_test_expose></BOUCLE_sous_rubriques>
+		</ul>
+	</B_sous_rubriques>
+	</BOUCLE_rub>

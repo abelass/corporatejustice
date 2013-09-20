@@ -1,0 +1,18 @@
+<B_liste>
+<h2>Archive</h2>
+[<p class="pagination">(#PAGINATION)</p>]
+<ul id="carre2">
+	<BOUCLE_liste(MAILSHOTS){listes=internalnewsletter} {statut ?}{pagination}{!par date}>
+	<li>
+	[(#EXPOSE|?{
+		#SUJET,
+		<a[ class="(#ENV{id}|non)ajax"] href="[(#SELF|parametre_url{id_mailshot,#ID_MAILSHOT}|parametre_url{id,''})]">#SUJET</a>
+		}
+		)]
+	</li>
+	</BOUCLE_liste>
+</ul>
+</B_liste>
+<BOUCLE_principale(MAILSHOTS){id_mailshot ?} {id ?}{si #ENV{id}|ou{#ENV{id_mailshot}}|oui}>
+	#HTML
+</BOUCLE_principale>

@@ -1,0 +1,41 @@
+#CACHE{24*3600}
+<BOUCLE_rub(RUBRIQUES){id_parent=#ID_RUBRIQUE}{par num titre}>
+     <B_article_recent7>
+	<div class="item">
+		<h3><a href="[(#URL_RUBRIQUE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
+		<BOUCLE_article_recent7(ARTICLES){id_rubrique}{!par date}{lang}{0,1}>
+			<p><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+			<B_traductions>
+			<br />
+			<small> - [(#TOTAL_BOUCLE|=={1}|?{<:article_traduction:>,<:articles_traduction:>})] :
+			<BOUCLE_traductions(ARTICLES) {traduction} {par lang}{exclus}>
+			<a href="[(#URL_ARTICLE|parametre_url{lang,#LANG})]" rel="alternate" hreflang="#LANG" title="[(#TITRE|texte_backend)]">[(#LANG)]</a> 
+			</BOUCLE_traductions>
+			</small>
+			</B_traductions>
+		</p>
+		[<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
+		<p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+		<p class="#EDIT{texte} texte">[(#INTRODUCTION|couper{400})]
+		</BOUCLE_article_recent7>
+		<a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a></p>	
+		</div>		
+		</B_article_recent7>
+		
+		<B_article_recent7_all>
+			<div class="item">
+		<h4>#TITRE</h4>  
+		<BOUCLE_article_recent7_all(ARTICLES){id_rubrique}{!par date}{0,1}>
+			<p><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]</p>
+			[<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
+			<p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+			<p class="#EDIT{texte} texte">[(#INTRODUCTION|couper{400})]
+		</BOUCLE_article_recent7_all>
+		<a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a></p>
+		</div>		
+		</B_article_recent7_all>				
+	<//B_article_recent7>	
+</BOUCLE_rub>
+				
+
+

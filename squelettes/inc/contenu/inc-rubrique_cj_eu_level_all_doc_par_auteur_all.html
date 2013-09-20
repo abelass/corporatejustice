@@ -1,0 +1,85 @@
+#CACHE{12*3600}
+        <BOUCLE_rubrique(RUBRIQUES){id_rubrique}>
+              <p>
+            [(#LOGO_RUBRIQUE||image_reduire{200,200})]
+            <h2 class="#EDIT{titre} titre">#TITRE</h2> <h3><:all_documents:></h3></BOUCLE_mot>
+        </p>      
+      <B_auteurs_boucle>
+
+      <a name="top"></a>
+      <div class="menulist">
+      <form method="post">
+<select id="menu" class="forml"
+        onchange="go()">	
+	<option selected="selected" value=""><BOUCLE_pays_titre(AUTEURS) {id_auteur=#ENV{id_auteur}}>#NOM</BOUCLE_pays_titre></B_pays_titre><:choisir_auteur:><//B_pays_titre></option>
+        <BOUCLE_auteurs_boucle(AUTEURS){unique}>
+           <B_articles_boucle> 
+     [<option value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,all}|entites_html)]##NOM" title="NOM">(#NOM|unique)</option>]
+          <BOUCLE_articles_boucle(ARTICLES){id_auteur}{id_groupe=7}{lang}{id_auteur!=#ENV{id_auteur}}>        
+                 </BOUCLE_articles_boucle>
+           </B_articles_boucle> 
+           <B_articles_boucle_all> 
+      [<option value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,all}|entites_html)]##NOM" title="NOM">(#NOM|unique)</option>]
+          <BOUCLE_articles_boucle_all(ARTICLES){id_auteur}{id_groupe=7}{id_auteur!=#ENV{id_auteur}}>        
+                 </BOUCLE_articles_boucle_all>
+           </B_articles_boucle_all>
+           <//B_articles_boucle>   	   
+         </BOUCLE_auteurs_boucle>
+      - [<option value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,name}|entites_html)]" title="NOM"><:all_documents_by_name:></option>]
+      </B_auteurs_boucle>
+            <//B_auteurs_boucle>
+         </select>
+          </form>       
+        <BOUCLE_auteurs(AUTEURS){par nom}>
+          <B_articles>           
+           <a name="#NOM"></a> <h2>#NOM</h2> <a class="backtop" href="#top" title="top">Back top</a>
+              [<p>(#PAGINATION)</p>]
+            <ul id="carre2">
+           <BOUCLE_articles(ARTICLES){id_groupe=7} {id_auteur} {!par date} {pagination 5}{lang}>
+                <li><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br /><small>[(#DATE|affdate_jourcourt)]</small>
+<B_afficher_document>
+
+              <BOUCLE_afficher_document(DOCUMENTS) {id_article} {mode=document}{extension IN doc,odf,rtf,pdf,html}>
+			<p>
+				<a href="#URL_DOCUMENT" title="#TITRE">
+                                <p class="spip_doc_titre">[(#LOGO_DOCUMENT|left||image_reduire{15})] <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[&nbsp;(#TITRE|sinon{<:info_document:>})]</a> (#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</p>
+                  [<p class="spip_doc_descriptif">(#DESCRIPTIF)</p>]
+			</p>
+              </BOUCLE_afficher_document>
+
+		</li>
+              </B_afficher_document>	      
+           </BOUCLE_articles>
+             </ul>
+           </B_articles>
+          <B_articles_all>           
+           <a name="#NOM"></a> <h2>#NOM</h2> <a class="backtop" href="#top" title="top">Back top</a>
+              [<p>(#PAGINATION)</p>]
+            <ul id="carre2">
+           <BOUCLE_articles_all(ARTICLES){id_groupe=7} {id_auteur} {!par date} {pagination 5}>
+                <li><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]<br /><small>[(#DATE|affdate_jourcourt)]</small>
+<B_afficher_document_all>
+		<li style="background-image:none;">
+			<ul>
+              <BOUCLE_afficher_document_all(DOCUMENTS) {id_article} {mode=document}{extension IN doc,odf,rtf,pdf,html}>
+			<li>
+				<a href="#URL_DOCUMENT" title="#TITRE">
+                                <p class="spip_doc_titre">[(#LOGO_DOCUMENT|left||image_reduire{15})] <a href="#URL_DOCUMENT" title="<:bouton_telecharger:>" type="#MIME_TYPE">[&nbsp;(#TITRE|sinon{<:info_document:>})]</a> (#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</p>
+                  [<p class="spip_doc_descriptif">(#DESCRIPTIF)</p>]
+			</li>
+              </BOUCLE_afficher_document_all>
+			</ul>
+		</li>
+              </B_afficher_document_all>	      
+           </BOUCLE_articles_all>
+             </ul>
+           </B_articles_all>
+	   
+            <//B_articles>          
+        </BOUCLE_auteurs>
+
+        </BOUCLE_auteurs(>           
+        </BOUCLE_rubrique>
+        </B_rubrique>       
+         <h2><:en_construction:></h2>
+         <//B_rubrique>  

@@ -1,0 +1,80 @@
+#CACHE{86400}
+<BOUCLE_article_principal(ARTICLES) {id_article}>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'>
+<html dir="#LANG_DIR" lang="#LANG">
+<head>
+<title>[(#TITRE|textebrut) - ][(#NOM_SITE_SPIP|textebrut)]</title>
+[<meta name="description" content="(#INTRODUCTION|couper{150}|textebrut)" />]
+<INCLURE{fond=inc/inc-head}>
+</head>
+
+<body class="intranet">
+<div id="topLeft">&nbsp;</div>
+<div id="page-wrap">
+		<div id="inside">
+			<div id="left-sidebar">
+				<INCLURE {fond=inc/menus/inc-menu_langues}{id_article}{id_rubrique}>
+				<div id="mainNavi">
+				<INCLURE{fond=inc/menus/inc-menu_laterale_intranet}{id_rubrique}>
+				</div>		
+			</div>
+	<div id="main-content">
+	[(#REM) Entete de la page + titre du site ]
+	<INCLURE{fond=inc/menus/inc-menu_intranet}{id_rubrique}>
+	<div id="content">
+	
+<div id="breadcrumb"><a href="#URL_SITE_SPIP/"><:accueil_site:></a><BOUCLE_ariane(HIERARCHIE){id_article}> &gt; <a href="#URL_RUBRIQUE">[(#TITRE|couper{80})]</a></BOUCLE_ariane>[ &gt; (#TITRE|couper{80})]</div>
+
+		[(#REM) Contenu principal : contenu de l'article ]
+				#DEBUT_SURLIGNE
+				[<p class="#EDIT{surtitre} surtitre">(#SURTITRE)</p>]
+				<h1 class="#EDIT{titre} titre">#TITRE</h1>
+				[<p class="#EDIT{soustitre} soustitre">(#SOUSTITRE)</p>]
+				#FIN_SURLIGNE
+<div style="float:right; margin:0 5px 3px 3px;">#ENVIAR_EMAIL**</div>
+				<p><small>[(#DATE|nom_jour) ][(#DATE|affdate)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
+			#DEBUT_SURLIGNE
+			[<div class="logo_art">(#LOGO_ARTICLE||image_reduire{200,200})</div>]
+			[<p class="#EDIT{chapo} chapo">(#CHAPO)</p>]
+			[<p class="#EDIT{hyperlien} lien"><:voir_en_ligne:> : <a href="(#URL_SITE)" class="spip_out">[(#NOM_SITE|sinon{[(#URL_SITE|couper{80})]})]</a></p>]
+			[<div class="#EDIT{texte} texte">(#TEXTE|image_reduire{520,0})</div>]
+			#FIN_SURLIGNE
+
+
+			[<div class="ps"><h2><:info_ps:></h2>#DEBUT_SURLIGNE<div class="#EDIT{ps}">(#PS)</div>#FIN_SURLIGNE</div>]
+
+			[(#REM) Autres documents joints a l'article ]
+			<B_documents_joints>
+			<div id="documents_joints">
+				<h2><:medias:titre_documents_joints:></h2>
+				<ul id="carre">
+					<BOUCLE_documents_joints(DOCUMENTS) {id_article} {mode=document} {par num titre, date} {extension !IN png,jpg,gif}>
+					<li>
+						<div class="spip_doc_titre"><a href="#URL_DOCUMENT" title="<:medias:bouton_telecharger:>" type="#MIME_TYPE">[(#TITRE|sinon{[(#FICHIER|basename|couper{80})]})]</a> <small>(#TYPE_DOCUMENT[ - (#TAILLE|taille_en_octets)])</small></div>
+						[<div class="spip_doc_descriptif">(#DESCRIPTIF)</div>]
+					</li>
+					</BOUCLE_documents_joints>
+				</ul>
+			</div>
+			</B_documents_joints>
+			
+
+			[<div class="notes"><h2><:info_notes:></h2>#DEBUT_SURLIGNE(#NOTES)#FIN_SURLIGNE</div>]
+			<div class="last">&nbsp;</div>
+		</div><!-- fin content-->
+
+	[(#REM) Pied de page ]
+	<INCLURE{fond=inc/inc-pied}{skel=#SQUELETTE}>
+			<div class="clear">&nbsp;</div> 
+	</div><!-- end main-content -->
+	</div><!-- fin inside -->
+	</div><!-- page-wrap -->
+</body>
+</html>
+</BOUCLE_article_principal>
+</B_article_principal>
+[(#ID_ARTICLE|AccesRestreint_article_restreint|?{' ',''})    
+#LOGIN_PUBLIC]
+[(#ID_ARTICLE|AccesRestreint_article_restreint|?{'',' '})
+<center>Page does not exist, please go back to the <a href="#URL_SITE_SPIP" title="URL_SITE"> Home Page"</a></center> ]
+<//B_article_principal>

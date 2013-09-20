@@ -1,0 +1,12 @@
+<BOUCLE_rubriques23(RUBRIQUES) {id_rubrique} {par num titre, titre}{tout}>
+        <li id="#ENV{id,nav001}" [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{class="active",''})]>
+            <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule" ><span>#TITRE</span></a>
+                        <ul>
+                <BOUCLE_sous_rubriques_mots(MOTS) {id_groupe=2} {par num titre, titre}{tout}>
+                    <li class="lastNav">
+                    <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{priorities,#ID_MOT})]"  >[(#TITRE|supprimer_numero|couper{80})]</a></li>
+                </BOUCLE_sous_rubriques_mots>
+                        </ul>
+
+        </li>
+</BOUCLE_rubriques23>

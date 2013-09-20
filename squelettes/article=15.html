@@ -1,0 +1,64 @@
+<BOUCLE_art(ARTICLES){id_article}>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>#NOM_SITE_SPIP - <BOUCLE_titre(RUBRIQUES){id_rubrique}>[(#TITRE|textebrut|supprimer_numero)]</BOUCLE_titre></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=#CHARSET" />
+  <meta name="description" content="[(#DESCRIPTIF_SITE_SPIP|textebrut)]" />
+  <meta name="keywords" content="<BOUCLE_metatags(MOTS){id_groupe=1}{", "}>[(#TITRE|supprimer_numero)]</BOUCLE_metatags>" />
+  <meta name="distribution" content="GLOBAL" />
+  <meta name="rating" content="GENERAL" />
+  <meta name="robots" content="INDEX,FOLLOW" />
+  <meta name="author" content="#NOM_SITE_SPIP" />
+  <meta name="copyright" content="#NOM_SITE_SPIP" />
+  <meta name="revisit-after" content="7 days" />
+  <link rel="shortcut icon" href="[(#CHEMIN{images/favicon.png})]" />
+  <link rel="stylesheet" href="[(#CHEMIN{css/flash.css})]" type="text/css" media="screen" />
+  <link rel="stylesheet" href="[(#CHEMIN{css/print.css})]" type="text/css" media="print" />
+  <link rel="stylesheet" href="[(#CHEMIN{css/facebox.css})]" type="text/css" media="screen" />
+  <!--[if IE]><style type="text/css" media="screen,projection">@import "[(#CHEMIN{css/ie7.css})]";</style><![endif]-->
+  <!--[if lt IE 7]><style type="text/css" media="screen,projection">@import "[(#CHEMIN{css/ie6.css})]";</style><![endif]-->
+  #INSERT_HEAD
+  <script type="text/javascript" src="[(#CHEMIN{js/facebox.js})]"></script> 
+  <script type="text/javascript" src="[(#CHEMIN{js/application.js})]"></script>
+  <script type="text/javascript" src="[(#CHEMIN{js/swfobject.js})]"></script>
+  <script type="text/javascript" src="[(#CHEMIN{js/jquery.pngFix.js})]"></script>
+  <script type="text/javascript"> 
+      $(document).ready(function(){ 
+          $(document).pngFix(); 
+      }); 
+  </script> 
+</head>
+<body>
+
+<div id="wrap">
+	<div id="header">
+	<h1><a href="#URL_SITE_SPIP" title="<:retour:>">#NOM_SITE_SPIP</a></h1>
+	[<h2>#TITRE | (#DATE||affdate)</h2>]
+	</div>
+	
+    <div id="principal">
+	<div id="contenu">
+		<h3>Quick menu</h3>
+        <ul>
+        [(#FLASH1|?{<li><a href="#flash_zone1">Law</a></li>})]
+        [(#FLASH_2|?{<li><a href="#flash_zone2">Office Practice</a></li>})]
+        [(#FLASH_3|?{<li><a href="#flash_zone3">Case Law</a></li>})]
+        [(#FLASH_4|?{<li><a href="#flash_zone4">ECTA News</a></li>})]
+        </ul>
+        [<div id="flash_zone0"><h3>Table of content</h3>(#TEXTE)</div>]
+        [<div id="flash_zone1"><h3>Law</h3>(#FLASH1|typo|propre)</div>]
+        [<div id="flash_zone2"><h3>Office Practice</h3>(#FLASH_2|typo|propre)</div>]
+        [<div id="flash_zone3"><h3>Case Law</h3>(#FLASH_3|typo|propre)</div>]
+        [<div id="flash_zone4"><h3>ECTA News</h3>(#FLASH_4|typo|propre)</div>]
+	</div>
+
+	</div>
+
+	<div id="footer"> </div>
+
+</div>
+
+</body>
+</html>
+</BOUCLE_art>
