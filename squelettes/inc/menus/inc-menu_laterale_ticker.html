@@ -3,7 +3,7 @@
 
     <ul id="js-news" class="js-hidden">
             <BOUCLE_art(ARTICLES) {lang}{id_rubrique=40} {age<=120}{!par date} {0,10}>
-            <li class="news-item"><a href="#URL_SITE" class="spip_out">[(#TITRE|texte_script)]</a><br/>[(#DATE|affdate)]<br/>[(#NOM_SITE*|sinon{#LESAUTEURS|textebrut})]</li>
+            <li class="news-item"><a href="#URL_SITE" class="spip_out">[(#TITRE|couper{80}|texte_script)]</a><br/>[(#DATE|affdate)]<br/>[(#NOM_SITE*|sinon{#LESAUTEURS|textebrut})]</li>
             </BOUCLE_art>       
     </ul>
 </div>
