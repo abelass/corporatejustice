@@ -1197,8 +1197,11 @@ float:left;}
 .item{margin-bottom:30px;
  }
 
-.socialbox{float:left;width:150px;overflow:hidden;padding:0 70px;
 
+#socialbox {
+    left: 8px;
+    position: absolute;
+    top: 230px;
 }
 
 .socialweb{float:left; text-align:center;margin:0 5px

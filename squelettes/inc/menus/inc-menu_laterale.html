@@ -1,3 +1,17 @@
+<div id="socialbox">
+    <div class="socialweb">
+          <a href="#URL_PAGE{backend}" title="<:syndiquer_site:>" target="blank">
+            [(#CHEMIN{images/rss.png}|image_reduire{35})]
+          </a>
+
+    </div>
+    <div class="socialweb">
+      <a href="#" target="_blank"  title="Twitter">
+          [(#CHEMIN{images/twitter.png}|image_reduire{35})]
+       </a>
+    </div>
+</div>  
+
 [(#REM)
   Barre de navigation, ouverte sur la hierarchie courante
   On fait un plan, et, quand on avance vers une rubrique,
@@ -35,34 +49,18 @@
       </B_sous_rubriques>
     </li>
   </BOUCLE_rubriques>
-  </ul>[(#REM)
-    <div class="socialbox">
-
-        <div class="socialweb">
-          <a href="http://twitter.com/home/?status=RIGHTS+FOR+PEOPLE+RULES+FOR+BUSINESS%3A+http://www.rightsforpeople.org/&source=http://www.rightsforpeople.org/" target="_blank"><div id="twitter" class="socialwebimg" title="Twitter"><img src="#CHEMIN{images/Twitter-icon.png}"  alt="Twitter"/></a></div>
-        </div>
-        
-        <div class="socialweb">
-          <a href="http://www.facebook.com/rightsforpeople" target="_blank"  title="Facebook"><img src="#CHEMIN{images/FaceBook-icon.png}"  alt="Facebook"/></a>
-        </div>
-
-
-         <div class="socialweb">
-          <a href="http://www.youtube.com/rightsforpeople" target="_blank"  title="Youtube"><img src="#CHEMIN{images/Youtube-icon.png}"  alt="Youtube"/></a>
-        </div>
-        
-         <div class="socialweb">
-          <a href="http://www.flickr.com/photos/rightsforpeople" target="_blank"  title="Flickr"><img src="#CHEMIN{images/Flickr-icon.png}"  alt="Flickr"/></a>
-        </div>
-
-    </div>]  
+  </ul>
 </div>
 </B_rubriques>
+
+
 
 [(#REM) le news ticker pour la home]
 [(#ENV{id_rubrique}|non)
     <INCLURE{fond=inc/menus/inc-menu_laterale_ticker}/>
 ]
+
+
 
 [(#REM) Thematic priorities]
 
