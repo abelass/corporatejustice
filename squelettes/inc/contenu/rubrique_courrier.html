@@ -1,8 +1,16 @@
+[(#REM)Les newsletters publiés]
+
+#SET{id_newsletter,#ARRAY}
+<BOUCLE_test(NEWSLETTERS)>
+    #SET{id_newsletter,#GET{id_newsletter}|push{#ID_NEWSLETTER}}
+</BOUCLE_test>
+
+[(#REM)Les envois des newsletters publiés de la liste internalnewsletter]
 <B_liste>
 <h2>Archive</h2>
 [<p class="pagination">(#PAGINATION)</p>]
 <ul id="carre2">
-	<BOUCLE_liste(MAILSHOTS){listes=internalnewsletter} {statut ?}{pagination}{!par date}>
+	<BOUCLE_liste(MAILSHOTS){listes=internalnewsletter} {id IN #GET{id_newsletter}}{statut ?}{pagination}{!par date}>
 	<li>
 	[(#EXPOSE|?{
 		#SUJET,
