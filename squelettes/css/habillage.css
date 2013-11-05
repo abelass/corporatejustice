@@ -1217,13 +1217,12 @@ clear:both;
 /*Menu thematic Priorities*/
 
 ul.thematic_priorities {
-    left: 110px;
-    position: absolute;
-    top: 460px;
+    margin: 10px 0 0 110px;
     width: 286px;
+    
 }
 
-.page_sommaire ul.thematic_priorities{top: 600px;}
+.page_sommaire ul.thematic_priorities{top: 625px;position: absolute;    left: 110px;margin:0}
 
 ul.thematic_priorities a {text-decoration:none;}
 
