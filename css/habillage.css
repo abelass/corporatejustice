@@ -589,7 +589,7 @@ p {
 	margin-left:10px;	
 }
 
-.section49 #content table div{
+.section49 #content table div, .section27 #content table div{
 	margin-right:0;
 	margin-left:0;
 }
@@ -1204,7 +1204,7 @@ float:left;}
     top: 230px;
 }
 
-.socialweb{float:left; text-align:center;margin:0 5px
+.socialweb{float:left; text-align:center;margin:0 3px
 }
 #ticker-wrapper.has-js {
     position: absolute;

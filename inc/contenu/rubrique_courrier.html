@@ -10,7 +10,7 @@
 <h2>Archive</h2>
 [<p class="pagination">(#PAGINATION)</p>]
 <ul id="carre2">
-	<BOUCLE_liste(MAILSHOTS){listes=internalnewsletter} {id IN #GET{id_newsletter}}{statut ?}{pagination}{!par date}>
+	<BOUCLE_liste(MAILSHOTS){listes=internalnewsletter} {id IN #GET{id_newsletter}}{statut ?}{pagination}{!par date}{date>#ENV{date_limite,0000-00-00 00:00:00}}>
 	<li>
 	[(#EXPOSE|?{
 		#SUJET,
