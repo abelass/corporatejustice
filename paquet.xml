@@ -1,0 +1,44 @@
+<paquet
+	prefix="eccj"
+	categorie="squelette"
+	version="1.0.0"
+	etat="dev"
+	compatibilite="[3.0.16;3.0.*]"
+	logo="prive/themes/spip/images/eccj-64.png"
+	documentation=""
+>
+	<!--
+		Paquet genere le 2014-05-07 09:48:05
+		(Vous pouvez bien entendu supprimer ces commentaires) 
+	-->
+
+	<nom>ECCJ</nom>
+
+	<!-- cette balise peut etre presente plusieurs fois s'il y a plusieurs auteurs --> 
+	<auteur lien='http://websimple.be/'>Rainer Müller</auteur>
+
+	<licence>GNU/GPL</licence>
+
+	<!--
+		Exemple de commandes
+		* dependances
+		<necessite nom="saisies" compatibilite="[1.21.0;]" />
+		<utilise nom="saisies" compatibilite="[1.21.0;]" />
+		<lib nom="simplehtmldom" lien="http://chemin_vers_archive.zip" />
+		* pipelines
+		<pipeline nom="autoriser" inclure="eccj_autorisations.php" />
+		<pipeline nom="insert_head" inclure="eccj_pipelines.php" />
+		* declarer un pipeline 
+		<pipeline nom="mon_pipeline" action="" />
+		* parents de menus de SPIP :
+				menu_accueil (A eviter), menu_edition, menu_publication,
+				menu_activite, menu_squelette, menu_administration, menu_configuration 
+		<menu nom="eccj" titre="eccj:eccj_titre" parent="menu_edition"  icone="images/eccj-16.png" />
+		* parents d'onglets... configuration, plugins, statistiques, ... 
+		<onglet nom="eccj" titre="eccj:eccj_titre" parent="configuration" icone="images/eccj-24.png" />
+	-->
+
+
+
+
+</paquet>
