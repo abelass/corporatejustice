@@ -2,7 +2,6 @@
 *.pyc
 *.pyo
 .svn
-IMG
 _svn
 connect.php
 dump
