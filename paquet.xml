@@ -1,7 +1,7 @@
 <paquet
 	prefix="eccj"
 	categorie="squelette"
-	version="1.0.1"
+	version="1.0.2"
 	etat="dev"
 	compatibilite="[3.0.16;3.0.*]"
 	logo="prive/themes/spip/images/eccj-64.png"
