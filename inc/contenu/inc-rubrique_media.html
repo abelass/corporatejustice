@@ -16,7 +16,7 @@
 		</p>
 		[<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
 		<p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
-		<p class="#EDIT{texte} texte">[(#INTRODUCTION|couper{400})]
+		<p class="#EDIT{texte} texte">[(#INTRODUCTION)]
 		</BOUCLE_article_recent7>
 		<a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a></p>	
 		</div>		
@@ -29,7 +29,7 @@
 			<p><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a> [#LANG]</p>
 			[<div class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</div>]
 			<p><small>[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</small></p>
-			<p class="#EDIT{texte} texte">[(#INTRODUCTION|couper{400})]
+			<p class="#EDIT{texte} texte">[(#INTRODUCTION)]
 		</BOUCLE_article_recent7_all>
 		<a href="#URL_RUBRIQUE" title="#TITRE"><:see_more:> #TITRE</a></p>
 		</div>		
