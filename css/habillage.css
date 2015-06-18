@@ -1223,7 +1223,8 @@ clear:both;
 ul.thematic_priorities {
     margin: 10px 0 0 110px;
     width: 286px;
-    
+    clear:left;
+    padding-top:10px
 }
 
 .page_sommaire ul.thematic_priorities{top: 625px;position: absolute;    left: 110px;margin:0}

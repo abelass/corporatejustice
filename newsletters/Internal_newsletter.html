@@ -188,12 +188,12 @@
 
     <tr id="id_118">
       <td  colspan="2"  style="cell-align:top;" valign=top>
-        <div style="clear:both;">
+        <div style="clear:both; width:90%">
       <B_member_updates_left>
         <h2 id="#ID_ARTICLE" style="color:#000000; background: #E0F007;border: 1px solid #CCC;padding: 0.5em;margin-bottom: 1em;font-weight: bold;text-align: center;">Member updates</h2>
-        <div style="float:left">
+        <div style="float:left; margin:0; width:47%">
       <BOUCLE_member_updates_left(ARTICLES){id_article IN #GET{articles_left}}{par date}{inverse}>
-          <div style="border:dashed 1px #CCC;padding:3px; width:330px;margin-bottom:10px">
+          <div style="border:dashed 1px #CCC;padding:3px; width:100%; margin:0 0 10px 0">
           <h3 style="color: #666666;font-family: 'Arial', 'Sans', sans-serif;font-size:14px;margin: 0.5em 0px 0.25em;">#TITRE</h3>
           [<div style="float:[(#COMPTEUR_BOUCLE|alterner{left, right})]; width:100px; margin:0 5px 5px 0px"><img src="(#LOGO_ARTICLE|image_reduire{100}|extraire_attribut{src}|url_absolue)"/></div>]
           [<div>(#INTRODUCTION)</div>]
@@ -205,9 +205,9 @@
       </B_member_updates_left>
       <B_member_updates_right>
        
-        <div style="float:right">
+        <div style="float:right; margin:0; width:47%">
       <BOUCLE_member_updates_right(ARTICLES){id_article IN #GET{articles_right}}{par date}{inverse}>
-          <div style="border:dashed 1px #CCC;padding:3px; width:330px;margin-bottom:10px;margin-left:10px;">
+          <div style="border:dashed 1px #CCC;padding:3px; width:100%; margin:0 0 10px 0">
           <h3 style="color: #666666;font-family: 'Arial', 'Sans', sans-serif;font-size:14px;margin: 0.5em 0px 0.25em;">#TITRE</h3>
           [<div style="float:[(#COMPTEUR_BOUCLE|alterner{left, right})]; width:100px; margin:0 5px 5px 0px"><img src="(#LOGO_ARTICLE|image_reduire{100}|extraire_attribut{src}|url_absolue)"/></div>]
           [<div>(#INTRODUCTION)</div>]
