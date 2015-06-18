@@ -1,18 +1,25 @@
 <BOUCLE_rub1(RUBRIQUES){id_rubrique}>
-            <BOUCLE_rub1_par(RUBRIQUES){id_enfant}{tout}>
-            <h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-            </BOUCLE_rub1_par>
-                <BOUCLE_rub1_par_alter(RUBRIQUES){id_rubrique}{tout}{0,#GET{date}}>
-                <h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-                </BOUCLE_rub1_par_alter>
-                    <BOUCLE_rub1_par_alter_act(RUBRIQUES){id_rubrique=1}{tout}>
-                    <h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
-                    </BOUCLE_rub1_par_alter_act>            
-                <//B_rub1_par_alter>                            
-            <//B_rub1_par>      
-        </BOUCLE_rub1>
-                <h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a><br/>
-                <span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
-        <p>[(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
-                [(#INTRODUCTION)]<br/><small>
-        <:see_more:>  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a></small></p>
+  <BOUCLE_rub1_par(RUBRIQUES){id_enfant}{tout}>
+    <h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
+  </BOUCLE_rub1_par>
+    <BOUCLE_rub1_par_alter(RUBRIQUES){id_rubrique}{tout}>
+      <h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
+      </BOUCLE_rub1_par_alter>
+      <BOUCLE_rub1_par_alter_act(RUBRIQUES){id_rubrique=1}{tout}>
+        <h1>[(#TITRE|supprimer_numero)]</h1>#SET{titre,#TITRE}
+      </BOUCLE_rub1_par_alter_act>
+    <//B_rub1_par_alter>
+  <//B_rub1_par>
+</BOUCLE_rub1>
+
+<h2><a href="[(#URL_ARTICLE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a>
+<br/>
+<span class="date">[(#DATE|affdate_jourcourt)][, <:par_auteur:> (#LESAUTEURS)]</span></h2>
+<p>
+  [(#LOGO_ARTICLE||image_reduire{150,113}|inserer_attribut{align,left})]
+  [(#INTRODUCTION)]
+  <br/>
+  <small> 
+    <:see_more:> <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{#LANG}})]"  title="#GET{titre}">#GET{titre}</a>
+  </small>
+</p>
