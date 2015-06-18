@@ -1,7 +1,7 @@
 <paquet
 	prefix="eccj"
 	categorie="squelette"
-	version="1.0.3"
+	version="1.0.4"
 	etat="dev"
 	compatibilite="[3.0.16;3.0.*]"
 	logo="prive/themes/spip/images/eccj-64.png"
@@ -31,7 +31,7 @@
 	<necessite nom="notifications" compatibilite="[3.2.0;]" />	
 	<necessite nom="crayons" compatibilite="[1.19.0;]" />
 	<necessite nom="accesrestreint" compatibilite="[3.9.0;]" />
-	<necessite nom="selection_objet" compatibilite="[1.10.0;]" />									
+	<necessite nom="selection_objet" compatibilite="[1.10.0;]" />
 					
 
 </paquet>
