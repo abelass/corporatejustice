@@ -17,6 +17,7 @@
 
 [(#REM)Affiche les version courte pour la section principal activité, ne s'affiche pas dans les soussections]
         <B_article_recent>
+        <div class="item">
         <BOUCLE_r_principale(RUBRIQUES) {id_rubrique}>
 	<h3><a href="[(#URL_RUBRIQUE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>							</BOUCLE_r_principale>    
                   <BOUCLE_article_recent(ARTICLES){!par date}{0,#GET{chiffre}}{lang}{doublons exclus1}{statut=publie}>
@@ -35,12 +36,13 @@
                 [<p>(#INTRODUCTION|couper{400})</p>]
 		<p><a href="#GET{url_rubrique}" title="#GET{titre}"><:see_more:> #GET{titre_rubrique}</a></p>
 		</BOUCLE_article_recent>
-		<br/>
+		</div>
 		</B_article_recent>
 		
 		[(#REM)Si pas d'article dans la langue, affiche les articles des autres langues]	
 				
 		<B_article_recent_all>
+		<div class="item">
         	<BOUCLE_r_principale_all(RUBRIQUES) {id_rubrique}{tout}>
 		<h3><a href="[(#URL_RUBRIQUE|parametre_url{"lang",#ENV{lang}})]">#TITRE</a></h3>
 		<div class="line"> </div>					
@@ -52,7 +54,7 @@
                         [<p>(#INTRODUCTION|couper{400})</p>]
 			<p><a href="#GET{url_rubrique}" title="#GET{titre}"><:see_more:> #GET{titre_rubrique}</a></p>
                 </BOUCLE_article_recent_all>
-		<br/>
+		</div>
 		</B_article_recent_all>		
 	<//B_article_recent>
 
