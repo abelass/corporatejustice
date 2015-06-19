@@ -90,10 +90,10 @@
   <BOUCLE_contenu_cj_eu_level(RUBRIQUES) {id_rubrique} {id_mot=6}>
   <div class="twoColumnsRight">  
          [
-           <p>(#ENV{list}|=={date}|oui)<a href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{lang,#ENV{lang}}|parametre_url{list,name})]" title="select by name"><:nom:></a></p>
+           <p>(#ENV{list}|=={date}|oui)<a href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,name})]" title="select by name"><:nom:></a></p>
          ]
          [
-           <p><a href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{lang,#ENV{lang}}|parametre_url{list,date})]" title="select by name">(#ENV{list}|!=={date}|oui)
+           <p><a href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,date})]" title="select by name">(#ENV{list}|!=={date}|oui)
            [(#ENV{list}|=={'name'}|?{<:key_docs_date:>,<:key_docs:>})
            ]</a>
            </p>
@@ -102,7 +102,7 @@
      <B_sous_rubriques_CJ_Eu_Level>
       <ul>
                               <BOUCLE_sous_rubriques_CJ_Eu_Level(MOTS) {id_groupe=7} {par num titre}{tout}>
-                                [(#ENV{periode}|=={#ID_MOT}|?{<li class="on">[(#TITRE|couper{80})]</li>,<li><a  href="[(#URL_RUBRIQUE|parametre_url{periode,#ID_MOT}|parametre_url{lang,#ENV{lang}})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>})</li>]
+                                [(#ENV{periode}|=={#ID_MOT}|?{<li class="on">[(#TITRE|couper{80})]</li>,<li><a  href="[(#URL_RUBRIQUE|parametre_url{periode,#ID_MOT})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a>})</li>]
                                 </BOUCLE_sous_rubriques_CJ_Eu_Level>
         </ul>
                                 </B_sous_rubriques_CJ_Eu_Level>
@@ -179,7 +179,7 @@
          <BOUCLE_rubrique_principale_membres(RUBRIQUES) {id_rubrique} {id_mot=13} {tout}>
         <div class="twoColumnsRight">
     <BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
-          [(#ENV{id_mot}|=={''}|?{' '})[(#ENV{list}|!=={all}|?{' '})<p><a [class="(#ENV{list}|=={all}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{list,all})]" title="all"><:all_members:></a></p>]]
+          [(#ENV{id_mot}|=={''}|?{' '})[(#ENV{list}|!=={all}|?{' '})<p><a [class="(#ENV{list}|=={all}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{list,all})]" title="all"><:all_members:></a></p>]]
     </BOUCLE_rubrique>
      </div>
   [(#ENV{id_mot}|!=={''}|?{' '})<INCLURE{fond=inc/contenu/inc-rubrique_membres_sel}{id_rubrique}{id_mot=#ENV{id_mot}}>]

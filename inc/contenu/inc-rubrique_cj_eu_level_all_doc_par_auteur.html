@@ -1,5 +1,5 @@
 #CACHE{12*3600}
-        [(#REM) Détecte le premier auteur par ordere alphabétique]
+        [(#REM) Dï¿½tecte le premier auteur par ordere alphabï¿½tique]
         <BOUCLE_rubrique(RUBRIQUES){id_rubrique}{tout}>
                         <BOUCLE_articles_boucle_default(AUTEURS){!par nom}>
                <B_articles_default>
@@ -23,29 +23,29 @@
         onchange="go()">	
 	<option selected="selected" value=""><BOUCLE_pays_titre(AUTEURS) {id_auteur=#ENV{id_auteur}}>#NOM</BOUCLE_pays_titre></B_pays_titre><:choisir_auteur:><//B_pays_titre></option>
         <BOUCLE_auteurs(AUTEURS){par nom}{id_auteur=#ENV{id_auteur,#GET{id_auteur}}}>        
-       [(#REM) Affiche menu de sélection des auteurs correspondants et possibilité de choisir tout article]       
+       [(#REM) Affiche menu de sï¿½lection des auteurs correspondants et possibilitï¿½ de choisir tout article]       
       <B_auteurs_boucle>
 
         <BOUCLE_auteurs_boucle(AUTEURS){unique}{par nom}>
            <B_articles_boucle>
-     [ [<option  value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,name}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{list,name}|parametre_url{name,[(#NOM|attribut_html)]})]">(#NOM|unique)</a></option>] 
+     [ [<option  value="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,name}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{list,name}|parametre_url{name,[(#NOM|attribut_html)]})]">(#NOM|unique)</a></option>] 
           <BOUCLE_articles_boucle(ARTICLES){id_auteur}{id_groupe=7}{lang}{id_auteur!=#ENV{id_auteur}}>        
                  </BOUCLE_articles_boucle>
            </B_articles_boucle>
 	              <B_articles_boucle_all>
-     [<option  value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,name}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{list,name}|parametre_url{name,[(#NOM|attribut_html)]})]">(#NOM|unique)</a></option>] 
+     [<option  value="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,name}|parametre_url{id_auteur,#ID_AUTEUR}|parametre_url{list,name}|parametre_url{name,[(#NOM|attribut_html)]})]">(#NOM|unique)</a></option>] 
           <BOUCLE_articles_boucle_all(ARTICLES){id_auteur}{id_groupe=7}{id_auteur!=#ENV{id_auteur}}>        
                  </BOUCLE_articles_boucle_all>
     
            <//B_articles_boucle>   	   
          </BOUCLE_auteurs_boucle>
-      [<option  value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,all})]" ><:all_documents:></option>   
+      [<option  value="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,all})]" ><:all_documents:></option>   
            
     </B_auteurs_boucle>
       </select>
           </form> 
 
-             [(#REM) Affiche les résultat selon auteur choisit, par défaut le premier dans l'ordre alphabétique]  
+             [(#REM) Affiche les rï¿½sultat selon auteur choisit, par dï¿½faut le premier dans l'ordre alphabï¿½tique]  
           <B_articles>          
            <a name="#NOM"></a> <h2>#NOM</h2>
               [<p>(#PAGINATION)</p>]

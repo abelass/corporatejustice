@@ -49,10 +49,10 @@
 				</B_date>
 				<p><a href="[(#URL_ARTICLE|parametre_url{page,agenda}|parametre_url{theme,11}|parametre_url{type,mois})]" title="<:detailed_view:>"><:detailed_view:></a></p>
 				<//B_date>
-				<p><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" title="<:monthly_view:>"<:monthly_view:>"><:monthly_view:></a></p>
+				<p><a href="[(#URL_RUBRIQUE)]" title="<:monthly_view:>"<:monthly_view:>"><:monthly_view:></a></p>
 				</div>	
 				<div style="text-align:center;margin-left:90px;">
-					[(#CALENDRIER_MINI{#ENV{date},date,[(#URL_PAGE{jour}|parametre_url{lang,#ENV{lang}})],#URL_PAGE{calendrier_mini_event.json}})]
+					[(#CALENDRIER_MINI{#ENV{date},date,[(#URL_PAGE{jour})],#URL_PAGE{calendrier_mini_event.json}})]
 				</div>
 		
 			</div>

@@ -21,7 +21,7 @@
 				<div id="mainNavi">
 	<INCLURE{fond=inc/menus/inc-menu_laterale_intranet}{id_rubrique}>
 	<BOUCLE_article (ARTICLES) {id_article=48}>
-<p><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" title="<:monthly_view:>"<:monthly_view:>"><:monthly_view:></a></p>
+<p><a href="[(#URL_RUBRIQUE)]" title="<:monthly_view:>"<:monthly_view:>"><:monthly_view:></a></p>
 <p>[(#ENV{ajout_evenement}=={'oui'}|?{'',' '})
 <a href='[(#URL_ARTICLE|parametre_url{ajout_evenement,oui}|parametre_url{editer,oui})]'><:agenda:titre_cadre_ajouter_evenement:></a>]</p>
 </BOUCLE_article>

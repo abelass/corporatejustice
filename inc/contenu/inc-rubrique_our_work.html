@@ -5,7 +5,7 @@
 				<ul>
 				<BOUCLE_mots(MOTS) {id_groupe=#ENV{id_groupe}}{par num titre,titre}>
 				
-				[(#ID_RUBRIQUE|!=={11}|?{' ',''})[(#ID_MOT|=={#ENV{priorities}}|?{<li class="on">#TITRE</li>,<li><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{priorities,#ID_MOT})]" title="#TITRE"> #TITRE</a></li>})]]
+				[(#ID_RUBRIQUE|!=={11}|?{' ',''})[(#ID_MOT|=={#ENV{priorities}}|?{<li class="on">#TITRE</li>,<li><a href="[(#URL_RUBRIQUE|parametre_url{priorities,#ID_MOT})]" title="#TITRE"> #TITRE</a></li>})]]
 				</BOUCLE_mots>
 				</ul>
 				</div>

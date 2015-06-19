@@ -16,7 +16,7 @@
 				<li><h4><a href="#URL_MOT" title="#TITRE">#TITRE</a></h4></li>
 
                                 <BOUCLE_sous_rubriques(ARTICLES) {id_mot} {!par date}{exclus}{0,#GET{nombre,1}}>
-					[(#GET{nombre}|=={''}|?{'',' '})<li [ class="(#EXPOSE)"]><a href="[(#URL_ARTICLE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a><br/>
+					[(#GET{nombre}|=={''}|?{'',' '})<li [ class="(#EXPOSE)"]><a href="[(#URL_ARTICLE)]">[(#TITRE|couper{80})]</a><br/>
 					<small>[(#DATE|affdate_jourcourt)][<br/><:par_auteur:> (#LESAUTEURS)]</small></li>]
 				</BOUCLE_sous_rubriques>
 			</B_sous_rubriques>

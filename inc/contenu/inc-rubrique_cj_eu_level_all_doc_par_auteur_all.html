@@ -14,18 +14,18 @@
 	<option selected="selected" value=""><BOUCLE_pays_titre(AUTEURS) {id_auteur=#ENV{id_auteur}}>#NOM</BOUCLE_pays_titre></B_pays_titre><:choisir_auteur:><//B_pays_titre></option>
         <BOUCLE_auteurs_boucle(AUTEURS){unique}>
            <B_articles_boucle> 
-     [<option value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,all}|entites_html)]##NOM" title="NOM">(#NOM|unique)</option>]
+     [<option value="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,all}|entites_html)]##NOM" title="NOM">(#NOM|unique)</option>]
           <BOUCLE_articles_boucle(ARTICLES){id_auteur}{id_groupe=7}{lang}{id_auteur!=#ENV{id_auteur}}>        
                  </BOUCLE_articles_boucle>
            </B_articles_boucle> 
            <B_articles_boucle_all> 
-      [<option value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,all}|entites_html)]##NOM" title="NOM">(#NOM|unique)</option>]
+      [<option value="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,all}|entites_html)]##NOM" title="NOM">(#NOM|unique)</option>]
           <BOUCLE_articles_boucle_all(ARTICLES){id_auteur}{id_groupe=7}{id_auteur!=#ENV{id_auteur}}>        
                  </BOUCLE_articles_boucle_all>
            </B_articles_boucle_all>
            <//B_articles_boucle>   	   
          </BOUCLE_auteurs_boucle>
-      - [<option value="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,all}|parametre_url{list,name}|entites_html)]" title="NOM"><:all_documents_by_name:></option>]
+      - [<option value="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{list,name}|entites_html)]" title="NOM"><:all_documents_by_name:></option>]
       </B_auteurs_boucle>
             <//B_auteurs_boucle>
          </select>

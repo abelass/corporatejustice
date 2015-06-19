@@ -16,7 +16,7 @@
 
            <BOUCLE_articles(ARTICLES){id_mot=#ENV{periode}}{lang} {'	<div class="line"> </div>'}{!par date}>
 
-                                                      <h4><a href="[(#URL_ARTICLE|parametre_url{lang,#ENV{lang}})]">#TITRE</a></h4>
+                                                      <h4><a href="[(#URL_ARTICLE)]">#TITRE</a></h4>
 
                                                       [<p class="logo_rub">(#LOGO_ARTICLE|left||image_reduire{150})</p>]
 

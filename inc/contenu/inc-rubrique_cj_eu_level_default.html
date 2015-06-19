@@ -6,7 +6,7 @@
 	</BOUCLE_rubrique>
 				<B_mots>
 				<BOUCLE_mots(MOTS) {id_groupe=#ENV{id_groupe}}{!par num titre}>
-				<h4><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{periode,#ID_MOT})]" title="#TITRE"> #TITRE</a></h4>
+				<h4><a href="[(#URL_RUBRIQUE|parametre_url{periode,#ID_MOT})]" title="#TITRE"> #TITRE</a></h4>
 				<div>#DESCRIPTIF</div><br/>
 				</BOUCLE_mots>
 				

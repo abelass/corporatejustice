@@ -7,7 +7,7 @@
       <a name="top"></a>
         <BOUCLE_auteurs_boucle(MOTS){id_groupe=#ENV{id_groupe}}{par titre}{' - '}>
            <B_articles_boucle> 
-     [<span><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}}|parametre_url{id_groupe,#ID_GROUPE})]##TITRE" title="#TITRE">(#TITRE)</a></span>]
+     [<span><a href="[(#URL_RUBRIQUE|parametre_url{id_groupe,#ID_GROUPE})]##TITRE" title="#TITRE">(#TITRE)</a></span>]
           <BOUCLE_articles_boucle(AUTEURS){id_mot}>        
                  </BOUCLE_articles_boucle>
            </B_articles_boucle>   
