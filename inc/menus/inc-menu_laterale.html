@@ -1,83 +1,70 @@
 <div id="socialbox">
-    <div class="socialweb">
-          <a href="#URL_PAGE{backend}" title="<:syndiquer_site:>" target="blank">
-            [(#CHEMIN{images/rss.png}|image_reduire{25})]
-          </a>
-
-    </div>
-    <div class="socialweb">
-      <a href="https://twitter.com/corpjust" target="_blank"  title="Twitter">
-          [(#CHEMIN{images/twitter.png}|image_reduire{25})]
-       </a>
-    </div>
-    <div class="socialweb">
-      <a href="#URL_PAGE{newsletter}" class="mediabox" title="Subscribe to our Newsletter">
-          [(#CHEMIN{images/email.png}|image_reduire{25})]
-       </a>
-    </div>    
-</div>  
+  <div class="socialweb">
+    <a href="#URL_PAGE{backend}" title="<:syndiquer_site:>" target="blank">
+      [(#CHEMIN{images/rss.png}|image_reduire{25})]
+    </a>
+  </div>
+  <div class="socialweb">
+    <a href="https://twitter.com/corpjust" target="_blank"  title="Twitter"> [(#CHEMIN{images/twitter.png}|image_reduire{25})] </a>
+  </div>
+  <div class="socialweb">
+    <a href="#URL_PAGE{newsletter}" class="mediabox" title="Subscribe to our Newsletter"> [(#CHEMIN{images/email.png}|image_reduire{25})] </a>
+  </div>
+</div>
 
 [(#REM)
-  Barre de navigation, ouverte sur la hierarchie courante
-  On fait un plan, et, quand on avance vers une rubrique,
-  on l'affiche si son parent est expose ou est la racine du site. Sont exclus les rubriques 11,25,31]
-  
-  #SET{rubs_interdit,#ARRAY{
-      0,11,1,25,2,31,3,32,4,23,5,48,6,37,7,50
-      }
-    }
+Barre de navigation, ouverte sur la hierarchie courante
+On fait un plan, et, quand on avance vers une rubrique,
+on l'affiche si son parent est expose ou est la racine du site. Sont exclus les rubriques 11,25,31]
 
-  <BOUCLE_article_mois_avec_trad(ARTICLES) {id_rubrique=17}{age<=0}{par date,titre}{0,1}> </BOUCLE_article_mois_avec_trad>
-  #SET{rubs_interdit,#GET{rubs_interdit}|array_merge{#ARRAY{5,17}}}
-  <//B_article_mois_avec_trad>
+#SET{rubs_interdit,#LISTE{11,25,31,32,23,48,37,50,8,18}}
 
+<BOUCLE_article_mois_avec_trad(ARTICLES) {id_rubrique=17}{age<=0}{par date,titre}{0,1}> </BOUCLE_article_mois_avec_trad>
+#SET{rubs_interdit,#GET{rubs_interdit}|array_merge{#ARRAY{5,17}}}
+<//B_article_mois_avec_trad>
 
 <B_rubriques>
 <div id="mainNavi"><a href="#URL_SITE_SPIP/" title="<:accueil_site:>"><img src="#CHEMIN{css/images/logo_eccj.gif}" width="215" height="133" border="0"/></a>&nbsp;
 
-
-      <ul id="Navigation">        
+<ul id="Navigation">
   <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{tout}{id_rubrique !IN #GET{rubs_interdit}}>
-  
-  
-        <li [ class="(#EXPOSE)"]>
+
+    <li [ class="(#EXPOSE)"]>
       <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a>
 
-          [(#ENV{id_rubrique}|=={11}|?{' ',''})<INCLURE{fond=inc/menus/inc-menu_laterale_ss_cj_elevel} {id_rubrique}{periode=#ENV{periode}}>]
-                              
-      <B_sous_rubriques>                              
-                          <ul>
-                                <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre}{!par id_rubrique}{tout}><BOUCLE_test_expose(RUBRIQUES) {id_enfant}{tout}>#EXPOSE{' '}</BOUCLE_test_expose>
-          <li [ class="(#EXPOSE)"]><a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques){tout}></BOUCLE_re>  </li>
-        </B_test_expose></BOUCLE_sous_rubriques>
-      </ul>
+      [(#ENV{id_rubrique}|=={11}|?{' ',''})
+      <INCLURE{fond=inc/menus/inc-menu_laterale_ss_cj_elevel} {id_rubrique}{periode=#ENV{periode}}>
+        ]
+
+        <B_sous_rubriques>
+          <ul>
+            <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent}{par num titre}{!par id_rubrique}{tout}>
+              <BOUCLE_test_expose(RUBRIQUES) {id_enfant}{tout}>#EXPOSE{' '}</BOUCLE_test_expose>
+                <li [ class="(#EXPOSE)"]>
+                  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]">[(#TITRE|couper{80})]</a>
+                  <BOUCLE_re(BOUCLE_sous_rubriques){tout}>
+                    </BOUCLE_re>
+                </li>
+                </B_test_expose></BOUCLE_sous_rubriques>
+          </ul>
       </B_sous_rubriques>
     </li>
   </BOUCLE_rubriques>
-  </ul>
+</ul>
 </div>
 </B_rubriques>
 
-
-
 [(#REM) le news ticker pour la home]
 [(#ENV{id_rubrique}|non)
-    <INCLURE{fond=inc/menus/inc-menu_laterale_ticker}/>
+<INCLURE{fond=inc/menus/inc-menu_laterale_ticker}/>
 ]
-
-
 
 [(#REM) Thematic priorities]
 
-   <ul class="thematic_priorities">
-        <INCLURE{fond=inc/inc-entete_thematic,id_rubrique=23,id=head,env}/>
-    </ul>
+<ul class="thematic_priorities">
+  <INCLURE{fond=inc/inc-entete_thematic,id_rubrique=23,id=head,env}/>
+</ul>
 </BOUCLE_the_pr>
 
-
- <//B_the_pr>
-
-
-
-  
+<//B_the_pr>
 
