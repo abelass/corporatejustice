@@ -5,103 +5,77 @@
 
 $GLOBALS[$GLOBALS['idx_lang']] = array(
 
-// A
-'a' => 'à',
-'agenda_section' => 'Agenda in which sections ?',
-'agenda_section_use' => 'Which section will be used',
-'a_partir_de' => 'de',
-'all_documents' => 'Tous les documents',
-'all_documents_by_name' => 'Tous selon auteur',
-'all_members' => 'Membres par ordre alphabétique',
-'article_traduction' => 'Également en',
-'articles_traduction' => "Dans d'autres langues",
+  // A
+  'a' => 'à',
+  'agenda_section' => 'Agenda in which sections ?',
+  'agenda_section_use' => 'Which section will be used',
+  'a_partir_de' => 'de',
+  'all_documents' => 'Tous les documents',
+  'all_documents_by_name' => 'Tous selon auteur',
+  'all_members' => 'Membres par ordre alphabétique',
+  'article_traduction' => 'Également en',
+  'articles_traduction' => "Dans d'autres langues",
 
-// B
+  // B
 
+  // C
+  'choisir_auteur' => 'Choisissez un auteur',
 
+  // D
+  'de' => 'from',
+  'detailed_view' => 'Vue détaillé',
+  'download' => 'Télécharger',
 
-// C
-'choisir_auteur' => 'Choisissez un auteur',
+  // E
+  'en_construction' => 'Under construction',
+  'edit' => 'Editez cet évènement',
 
-// D
-'de' => 'from',
-'detailed_view' => 'Vue détaillé',
-'download' => 'Télécharger',
+  // F
+  'from' => 'de',
 
-// E
-'en_construction' => 'Under construction',
-'edit' => 'Editez cet évènement',
+  // H
 
-// F
-'from' => 'de',
+  // I
+  'lieu' => 'lieu',
 
+  // J
+  'jusque_a' => "jusqu'à",
 
-// H
+  // k
+  'key_docs' => 'Documents clés',
+  'key_docs_date' => 'Par date',
 
+  // L
 
+  // M
+  'monthly_view' => 'Vue mensuelle',
 
-// I
-'lieu' => 'lieu',
+  // N
+  'no_event' => 'Currently there are no events planned',
+  'nom' => 'Par Auteur',
 
+  // O
 
-// J
-'jusque_a' => "jusqu'à",
+  // P
 
+  // R
+  'required' => 'Une<font color=red>*</font> indique que le champ est obligatoire',
+  'related' => 'Documents relationnés',
 
-// k
-'key_docs' => 'Documents clés',
-'key_docs_date' => 'Par date',
+  // S
+  'supprimer' => 'supprimer',
+  'see_more' => 'Voir plus sur',
+  'select_country' => 'Choisissez un pays',
 
-// L
+  // T
 
+  // U
 
+  // V
 
-// M
-'monthly_view' => 'Vue mensuelle',
+  // W
 
-
-// N
-'no_event' => 'Currently there are no events planned',
-'nom' => 'Par Auteur',
-
-
-// O
-
-
-
-// P
-
-
-// R
-'required' => 'Une<font color=red>*</font> indique que le champ est obligatoire',
-'related' => 'Documents relationnés',
-
-// S
-'supprimer' => 'supprimer',
-'see_more' => 'Voir plus sur',
-'select_country' => 'Choisissez un pays',
-
-// T
-
-
-
-// U
-
-
-
-// V
-
-
-// W
-
-
-// Y
-'your_email' => 'Votre email',
-
-
-
-
-
+  // Y
+  'your_email' => 'Votre email',
 );
-
 ?>
