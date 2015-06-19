@@ -1,47 +1,48 @@
 #CACHE{7200}
-
 <div id="navSecondary">
-<ul>
-<B_rubriques>
+  <ul>
+    <B_rubriques>
+      <INCLURE{fond=inc/inc-entete_thematic,id_rubrique=23}/>
 
-<INCLURE{fond=inc/inc-entete_thematic,id_rubrique=23}/>
+      <BOUCLE_rubriques11(RUBRIQUES) {id_rubrique=11} {par num titre, titre}{tout}>
+        <li id="nav002"  [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'class="active",''})]>
+        <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule" ><span>[(#TITRE|image_typo{police=Verdana.ttf,largeur=95,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{5})]</span></a>
+        <ul>
+        <BOUCLE_sous_rubriques_CJ_Eu_Level(MOTS) {id_groupe=7} {!par num titre}{tout}>
+        <li><a [class="(#ENV{periode}|=={#ID_MOT}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{periode,#ID_MOT}|parametre_url{lang,#ENV{lang}})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a></li>
+        </BOUCLE_sous_rubriques_CJ_Eu_Level>
+        <li><a [class="(#ENV{periode}|=={all}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{lang,#ENV{lang}}|parametre_url{list,date})]"[ class="(#EXPOSE)"]><:all_documents:></a></li>
+        </B_sous_rubriques_CJ_Eu_Level>
+        </ul>
+        </li>
+        </BOUCLE_rubriques11>
+        <BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{id_rubrique IN 25}{tout}>
+        <li id="nav003"  [(#EXPOSE|?{'class="active",''})]>
+          <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule"><span>[(#TITRE|image_typo{police=Verdana.ttf,largeur=96,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{5})]</span></a>
 
+          <B_sous_rubriques>
+            <ul>
+              <BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}{tout}>
+                <li>
+                  <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" <BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>class='daddy'</BOUCLE_test_sousrub>>[(#TITRE|supprimer_numero|couper{80})]</a>
+                  <BOUCLE_re(BOUCLE_sous_rubriques)>
+                    </BOUCLE_re>
+                </li>
+                </BOUCLE_sous_rubriques>
+            </ul>
+          </B_sous_rubriques>
 
-	<BOUCLE_rubriques11(RUBRIQUES) {id_rubrique=11} {par num titre, titre}{tout}>
-		<li id="nav002"  [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'class="active",''})]>
-			<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule" ><span>[(#TITRE|image_typo{police=Verdana.ttf,largeur=95,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{5})]</span></a>
-                                 <ul>
-                                <BOUCLE_sous_rubriques_CJ_Eu_Level(MOTS) {id_groupe=7} {!par num titre}{tout}>
-                                <li><a [class="(#ENV{periode}|=={#ID_MOT}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{periode,#ID_MOT}|parametre_url{lang,#ENV{lang}})]"[ class="(#EXPOSE)"]>[(#TITRE|couper{80})]</a></li>
-                                </BOUCLE_sous_rubriques_CJ_Eu_Level>
-                                <li><a [class="(#ENV{periode}|=={all}|?{'on','off'})"] href="[(#URL_RUBRIQUE|parametre_url{periode,all}|parametre_url{lang,#ENV{lang}}|parametre_url{list,date})]"[ class="(#EXPOSE)"]><:all_documents:></a></li>
-                                </B_sous_rubriques_CJ_Eu_Level>
-                                </ul>      
-		</li>
-	</BOUCLE_rubriques11>
-	<BOUCLE_rubriques(RUBRIQUES) {racine} {par num titre, titre}{id_rubrique IN 25}{tout}>
-		<li id="nav003"  [(#EXPOSE|?{'class="active",''})]>
-			<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule"><span>[(#TITRE|image_typo{police=Verdana.ttf,largeur=96,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{5})]</span></a>
+        </li>
+      </BOUCLE_rubriques>
+      <BOUCLE_rubriques_intranet(RUBRIQUES) {id_rubrique=37}>
+          <li  id="nav004"  [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'class="active",''})]>
+          <a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule"><span>[(#TITRE|image_typo{police=Verdana.ttf,largeur=96,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{5})]</span></a>
+          </li>
+      </BOUCLE_rubriques_intranet>
 
-			<B_sous_rubriques>
-			<ul>
-				<BOUCLE_sous_rubriques(RUBRIQUES) {id_parent} {par num titre, titre}{tout}>
-					<li>
-					<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" <BOUCLE_test_sousrub(RUBRIQUES){id_parent}{0,1}>class='daddy'</BOUCLE_test_sousrub>>[(#TITRE|supprimer_numero|couper{80})]</a><BOUCLE_re(BOUCLE_sous_rubriques)></BOUCLE_re>	</li>
-				</BOUCLE_sous_rubriques>
-			</ul>
-			</B_sous_rubriques>
-
-		</li>
-	</BOUCLE_rubriques>
-	<BOUCLE_rubriques_intranet(RUBRIQUES) {id_rubrique=37}>
-		<li  id="nav004"  [(#ENV{id_rubrique}|=={#ID_RUBRIQUE}|?{'class="active",''})]>
-			<a href="[(#URL_RUBRIQUE|parametre_url{lang,#ENV{lang}})]" class="intitule"><span>[(#TITRE|image_typo{police=Verdana.ttf,largeur=96,hauteur_ligne=14,padding=12,taille=8,couleur=414d51}||image_alpha{5})]</span></a>
-		</li>
-	</BOUCLE_rubriques_intranet>
-	
-		<li id="nav005">#FORMULAIRE_RECHERCHE
-	</li><!-- end "nav005" -->
-</B_rubriques>
-</ul>
+          <li id="nav005">
+            #FORMULAIRE_RECHERCHE
+          </li><!-- end "nav005" -->
+    </B_rubriques>
+  </ul>
 </div>
